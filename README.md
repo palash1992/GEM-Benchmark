@@ -67,10 +67,10 @@ gfs_score.get_gfs_score(res_file='real_results.h5')
 
 The output of the above execution is the below along with GFS scores:
 <p align="center">
-  <img width="420" height="300" src="images/realgraphProps.pdf">
+  <img width="420" height="300" src="images/realgraphProps.PNG">
 </p>
 <p align="center">
-  <img width="420" height="300" src="images/benchmark_real_MAP.pdf">
+  <img width="420" height="300" src="images/benchmark_real_MAP.PNG">
 </p>
 
 
