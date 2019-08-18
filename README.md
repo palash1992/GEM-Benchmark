@@ -45,7 +45,7 @@ To grant executable permission, run: chmod +x node2vec
 
 ## Usage
 ### Example 1
-Run the methods on Karate graph and evaluate them on graph reconstruction and visualization. The data is located in examples/data. The example can be run from examples folder as python test_karate.py -node2vec 0 (use -node2vec 1 to also run node2vec model):
+Plot the real graph statistics and benchmark plots.
 
 ```python
 from gem.utils import plot_util, plot_stats, gfs_score
@@ -67,10 +67,10 @@ gfs_score.get_gfs_score(res_file='real_results.h5')
 
 The output of the above execution is the below along with GFS scores:
 <p align="center">
-  <img width="420" height="300" src="images/realgraphProps.png">
+  <img width="420" height="300" src="images/realgraphProps.pdf">
 </p>
 <p align="center">
-  <img width="420" height="300" src="images/benchmark_real_MAP.png">
+  <img width="420" height="300" src="images/benchmark_real_MAP.pdf">
 </p>
 
 
