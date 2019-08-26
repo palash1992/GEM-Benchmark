@@ -1,7 +1,9 @@
 # GEM-benchmark: Benchmark for Graph Embedding Methods
 Graph embedding, which refers to the task of representing nodes of a graph in a low-dimensional space, has gained significant traction in the past few years, with applications including link prediction, node classification, and graph visualization. Many methods have been proposed for this task which primarily differs in the inherent properties being preserved from the original graph. However, comparing such methods is challenging. Most methods show performance boosts on just a few selected networks. Such performance improvement may be due to fluctuations or specific properties of the networks at hand, thus being often inconclusive when comparing methods on different networks. To conclusively determine the utility and advantages of an approach, one would need to make a comparison on several such networks. In this work, we introduce a principled framework to compare graph embedding methods. We test embedding methods on a corpus of real-world networks with varying properties and provide insights into existing state-of-the-art embedding approaches. We cluster the input networks in terms of their properties to get a better understanding of embedding performance. Furthermore, we compare embedding methods with traditional link prediction techniques to evaluate the utility of embedding approaches. We use the comparisons on benchmark graphs to define a score, called GFS-score, that can apply to measure any embedding method. We rank the state-of-the-art embedding approaches using the GFS-score and show that it can be used to understand and evaluate a novel embedding approach. We envision that the proposed framework may serve as a community benchmark to test and compare the performance of future graph embedding techniques.
 
-``GEM-benchmark`` is a Python package which offers a general framework to benchmark graph embedding methods. It has a suite of 100 real graphs and 12 synthetic graph generators and results of 9 link prediction methods on these 100 graphs. A paper showcasing the results using ``GEM-benchmark`` on various real world datasets can be accessed through [Benchmarks for Graph Embedding Evaluation](https://arxiv.org/abs/1908.06543). 
+``GEM-benchmark`` is a Python package which offers a general framework to benchmark graph embedding methods. It has a suite of 100 real graphs and 12 synthetic graph generators and results of 9 link prediction methods on these 100 graphs. A paper showcasing the results using ``GEM-benchmark`` on various real world datasets can be accessed through [Benchmarks for Graph Embedding Evaluation](https://arxiv.org/abs/1908.06543).
+
+The suite of 100 real graphs are primarily subsets of [CommunityFitNet](https://github.com/Aghasemian/CommunityFitNet) and [SNAP](http://snap.stanford.edu/). Please cite these references when using the real graphs.
 
 The module was developed and is maintained by Palash Goyal, Di Huang, Ankita Gowswami and Sujit Rokka Chhetri.
 
@@ -79,5 +81,26 @@ The output of the above execution is the below along with GFS scores:
         issn = "0950-7051",
         url = "https://arxiv.org/abs/1908.06543",
         author = "Goyal, Palash and Huang, Di and Goswami, Ankita and Chhetri, Sujit Rokka and Canedo, Arquimedes and Ferrara, Emilio"
+    }
+    
+Please cite the below papers too if the real graphs provided are used:
+    
+    @article{ghasemian:etal:2019,
+  	title={Evaluating overfit and underfit in models of network community structure},
+  	author={Ghasemian, Amir and Hosseinmardi, Homa and Clauset, Aaron},
+  	journal={IEEE Trans.\ Knowledge and Data Engineering (TKDE)},
+  	note    = {In press},
+  	year={2019}
+    }
+    
+    @article{leskovec2016snap,
+	  title={SNAP: A General-Purpose Network Analysis and Graph-Mining Library},
+	  author={Leskovec, Jure and Sosi{\v{c}}, Rok},
+	  journal={ACM Transactions on Intelligent Systems and Technology (TIST)},
+	  volume={8},
+	  number={1},
+	  pages={1},
+	  year={2016},
+	  publisher={ACM}
     }
 
