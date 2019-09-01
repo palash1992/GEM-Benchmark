@@ -1,0 +1,2009 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Baseline Graph Embedding Algorithms &mdash; gemben 0.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Benchmark Dataset" href="dataset.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> gemben
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dependency.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="challenge.html">Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contibution.html">Why this Benchmark Package?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gem_ben.html">GEM-Benchmark</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Dataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Benchmark Dataset</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Baseline Graph Embedding Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.aa">Adamic Adar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.ae_static">Static Graph Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.cn">Common Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.gcn">Graph Convolution Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.gf">Graph Factorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.hope">HOPE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.jc">Jaccard Coefficient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.lap">Laplacian Eigenmaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.lle">Locally Linear Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.node2vec">node2vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.pa">Preferential Attachment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.rand">Random Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.sdne">SDNE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.vae">Variational Auto-Encoder</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#gemben-utility-function">gemben utility function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.embedding.sdne_utils">Static Graph Embedding utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.evaluation.visualize_embedding">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.utils.embed_util">Embeding Utility Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.utils.bayesian_opt">Bayesian Optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.utils.bayesian_opt">Evaluation Utility Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#graph-generation-functions">Graph Generation Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.utils.graph_util">Graph Utility Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.utils.kronecker_generator">Kronecker Graph Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.utils.kronecker_init_matrix">Kronecker Matrix Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.utils.lrf_gen">lrf graph generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.utils.plot_util">Plotting Utility Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#evaluation-module">Evaluation Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.evaluation.evaluate_graph_reconstruction">Graph Reconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.evaluation.evaluate_link_prediction">Link Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.evaluation.evaluate_node_classification">Node Classification</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.evaluation.metrics">Evaluation Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#experiment-module">Experiment Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.experiments.exp">Simple Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gemben.experiments.exp_bay">Bayesian Hyperparameter Optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#full-experiments-with-benchmark">Full Experiments with Benchmark</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial - Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">General examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Addtional Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citations.html">Citing gemben</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gemben</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Baseline Graph Embedding Algorithms</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="baseline-graph-embedding-algorithms">
+<h1>Baseline Graph Embedding Algorithms<a class="headerlink" href="#baseline-graph-embedding-algorithms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-gemben.embedding.aa">
+<span id="adamic-adar"></span><h2>Adamic Adar<a class="headerlink" href="#module-gemben.embedding.aa" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.aa.AdamicAdar">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.aa.</code><code class="sig-name descname">AdamicAdar</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/aa.html#AdamicAdar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.aa.AdamicAdar" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://reader.elsevier.com/reader/sd/pii/S0378873303000091?token=6F43C18383A6F25A71900BE3D0FC6C10251CCB28A020DD02EB00C3758F0DBDB4E69D3C3A41DE87D28C79A03F0EED5157">Adamic Adar</a>.</p>
+<p>Adamic Adar is based on the intuition that common neighbors with very
+large neighbourhoods are less significant than common neighbors with small
+neighborhoods when predicting a connection between two nodes. Formally,
+it is defined as the sum of the inverse logarithmic degree centrality of
+the neighbours shared by the two nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.aa</span> <span class="k">import</span> <span class="n">AdamicAdar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">AdamicAdar</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">is_weighted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_python</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adamic Adar: Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.aa.AdamicAdar.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/aa.html#AdamicAdar.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.aa.AdamicAdar.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.aa.AdamicAdar.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/aa.html#AdamicAdar.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.aa.AdamicAdar.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.aa.AdamicAdar.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/aa.html#AdamicAdar.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.aa.AdamicAdar.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.aa.AdamicAdar.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/aa.html#AdamicAdar.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.aa.AdamicAdar.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.aa.AdamicAdar.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/aa.html#AdamicAdar.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.aa.AdamicAdar.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.aa.AdamicAdar.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/aa.html#AdamicAdar.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.aa.AdamicAdar.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.ae_static">
+<span id="static-graph-embedding"></span><h2>Static Graph Embedding<a class="headerlink" href="#module-gemben.embedding.ae_static" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.ae_static.AE">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.ae_static.</code><code class="sig-name descname">AE</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/ae_static.html#AE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.ae_static.AE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Static Autoencoder Based Embedding.</p>
+<p>Satic autoencoder based embedding utilizes an autoencoder to
+embed the higher dimension graph structure in lower dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.ae_static</span> <span class="k">import</span> <span class="n">AE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file_prefix</span> <span class="o">=</span> <span class="s2">&quot;gemben/data/sbm/graph.gpickle&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_gpickle</span><span class="p">(</span><span class="n">file_prefix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_colors</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ggemben/data/sbm/node_labels.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">AE</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+<span class="go">                    beta=5,</span>
+<span class="go">                    nu1=1e-6,</span>
+<span class="go">                    nu2=1e-6,</span>
+<span class="go">                    K=3,</span>
+<span class="go">                    n_units=[500, 300, ],n_batch=1024,</span>
+<span class="go">                    modelfile=[&#39;gemben/intermediate/enc_model.json&#39;,</span>
+<span class="go">                                &#39;gemben/intermediate/dec_model.json&#39;],</span>
+<span class="go">                    weightfile=[&#39;gemben/intermediate/enc_weights.hdf5&#39;,</span>
+<span class="go">                                 &#39;gemben/intermediate/dec_weights.hdf5&#39;])</span>
+<span class="go">                    embedding.learn_embedding(G)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G_X</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G_X_hat</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">get_reconstructed_adj</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">G_X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span><span class="p">[</span><span class="n">G_X</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G_X_diff</span> <span class="o">=</span> <span class="n">G_X</span> <span class="o">-</span> <span class="n">G_X_hat</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G_X_diff_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">G_X_diff</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loss_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">G_X_diff_B</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loss value (ideal): </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">loss_val</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rec_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">G_X</span> <span class="o">-</span> <span class="n">G_X_hat</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rec_norm</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_colors_arr</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">node_colors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">node_colors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="go">        node_colors_arr[idx] = np.where(node_colors[idx, :].toarray() == 1)[1][0]</span>
+<span class="go">        MAP, prec_curv, err, err_baseline = gr.evaluateStaticGraphReconstruction(</span>
+<span class="go">                                                        G, embedding, X, None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MAP:&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">MAP</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span>
+<span class="go">                        X,</span>
+<span class="go">                        di_graph=G,</span>
+<span class="go">                        node_colors=node_colors_arr</span>
+<span class="go">                    )</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ae_static.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.ae_static.AE.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em>, <em class="sig-param">embed=None</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/ae_static.html#AE.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.ae_static.AE.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.ae_static.AE.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/ae_static.html#AE.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.ae_static.AE.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.ae_static.AE.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/ae_static.html#AE.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.ae_static.AE.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.ae_static.AE.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/ae_static.html#AE.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.ae_static.AE.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.ae_static.AE.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">embed=None</em>, <em class="sig-param">node_l=None</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/ae_static.html#AE.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.ae_static.AE.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.ae_static.AE.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/ae_static.html#AE.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.ae_static.AE.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.cn">
+<span id="common-neighbors"></span><h2>Common Neighbors<a class="headerlink" href="#module-gemben.embedding.cn" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.cn.CommonNeighbors">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.cn.</code><code class="sig-name descname">CommonNeighbors</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/cn.html#CommonNeighbors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.cn.CommonNeighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://arxiv.org/pdf/cond-mat/0104209.pdf">Common Neighbors</a>.</p>
+<p>Common Neighbors defines the similarity between nodes
+as the number of common neighbors between them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.cn</span> <span class="k">import</span> <span class="n">CommonNeighbors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">CommonNeighbors</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="go">                          is_weighted=True, no_python=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Common Neighbors:</span>
+<span class="go">Training time: %f&#39; % (time() - t1))</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.cn.CommonNeighbors.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/cn.html#CommonNeighbors.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.cn.CommonNeighbors.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.cn.CommonNeighbors.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/cn.html#CommonNeighbors.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.cn.CommonNeighbors.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.cn.CommonNeighbors.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/cn.html#CommonNeighbors.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.cn.CommonNeighbors.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.cn.CommonNeighbors.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/cn.html#CommonNeighbors.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.cn.CommonNeighbors.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.cn.CommonNeighbors.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/cn.html#CommonNeighbors.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.cn.CommonNeighbors.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.cn.CommonNeighbors.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/cn.html#CommonNeighbors.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.cn.CommonNeighbors.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.gcn">
+<span id="graph-convolution-network"></span><h2>Graph Convolution Network<a class="headerlink" href="#module-gemben.embedding.gcn" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.gcn.GCN">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.gcn.</code><code class="sig-name descname">GCN</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gcn.html#GCN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gcn.GCN" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://papers.nips.cc/paper/6703-inductive-representation-learning-on-large-graphs.pdf">Graph Convolutional Network</a>.</p>
+<p>Graph Convolutional Network (GCN) aggregate the neighbors embeddings
+and features via convolutional operators, including spatial or
+spectral filters. GCNs learn embeddings in a semi-supervised manner
+and have shown great improvement and scalability on large graphs compared
+to other methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.gcn</span> <span class="k">import</span> <span class="n">GCN</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file_prefix</span> <span class="o">=</span> <span class="s2">&quot;gemben/data/sbm/graph.gpickle&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_gpickle</span><span class="p">(</span><span class="n">file_prefix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_colors</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+<span class="go">    open(&#39;gemben/data/sbm/node_labels.pickle&#39;, &#39;rb&#39;))</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">embedding</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">nu1</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">nu2</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+<span class="go">                       K=3, n_units=[500, 300, ],</span>
+<span class="go">                       n_iter=30, xeta=1e-3,</span>
+<span class="go">                       n_batch=500,</span>
+<span class="go">                       modelfile=[&#39;gemben/intermediate/enc_model.json&#39;,</span>
+<span class="go">                                  &#39;gemben/intermediate/dec_model.json&#39;],</span>
+<span class="go">                       weightfile=[&#39;gemben/intermediate/enc_weights.hdf5&#39;,</span>
+<span class="go">                                   &#39;gemben/intermediate/dec_weights.hdf5&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G_X</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G_X_hat</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">get_reconstructed_adj</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rec_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">G_X</span> <span class="o">-</span> <span class="n">G_X_hat</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rec_norm</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_colors_arr</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">node_colors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">node_colors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="go">        node_colors_arr[idx] = np.where(node_colors[idx, :].toarray() == 1)[1][0]</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span>
+<span class="go">                        G_X,</span>
+<span class="go">                        di_graph=G,</span>
+<span class="go">                        node_colors=node_colors_arr)</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;sdne_sbm_g_x.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.gcn.GCN.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em>, <em class="sig-param">embed=None</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gcn.html#GCN.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gcn.GCN.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gcn.GCN.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gcn.html#GCN.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gcn.GCN.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gcn.GCN.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gcn.html#GCN.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gcn.GCN.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gcn.GCN.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gcn.html#GCN.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gcn.GCN.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gcn.GCN.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">embed=None</em>, <em class="sig-param">node_l=None</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gcn.html#GCN.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gcn.GCN.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gcn.GCN.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gcn.html#GCN.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gcn.GCN.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.gf">
+<span id="graph-factorization"></span><h2>Graph Factorization<a class="headerlink" href="#module-gemben.embedding.gf" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.gf.GraphFactorization">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.gf.</code><code class="sig-name descname">GraphFactorization</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gf.html#GraphFactorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gf.GraphFactorization" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/40839.pdf">Graph Factorization</a>.</p>
+<p>Graph Factorization factorizes the adjacency matrix with regularization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.gf</span> <span class="k">import</span> <span class="n">GraphFactorization</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">GraphFactorization</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="go">                          is_weighted=True, no_python=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Graph Factorization:Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(),</span>
+<span class="go">                     di_graph=G, node_colors=None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.gf.GraphFactorization.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gf.html#GraphFactorization.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gf.GraphFactorization.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gf.GraphFactorization.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gf.html#GraphFactorization.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gf.GraphFactorization.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gf.GraphFactorization.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gf.html#GraphFactorization.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gf.GraphFactorization.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gf.GraphFactorization.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gf.html#GraphFactorization.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gf.GraphFactorization.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gf.GraphFactorization.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gf.html#GraphFactorization.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gf.GraphFactorization.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.gf.GraphFactorization.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/gf.html#GraphFactorization.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.gf.GraphFactorization.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.hope">
+<span id="hope"></span><h2>HOPE<a class="headerlink" href="#module-gemben.embedding.hope" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.hope.HOPE">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.hope.</code><code class="sig-name descname">HOPE</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/hope.html#HOPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.hope.HOPE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://www.kdd.org/kdd2016/papers/files/rfp0191-wangAemb.pdf">Higher Order Proximity Preserving</a>.</p>
+<p>Higher Order Proximity factorizes the higher order
+similarity matrix between nodes using generalized singular value decomposition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.hope</span> <span class="k">import</span> <span class="n">HOPE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">HOPE</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="go">                          is_weighted=True, no_python=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HOPE:Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span>
+<span class="go">                     di_graph=G, node_colors=None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.hope.HOPE.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/hope.html#HOPE.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.hope.HOPE.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.hope.HOPE.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/hope.html#HOPE.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.hope.HOPE.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.hope.HOPE.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/hope.html#HOPE.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.hope.HOPE.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.hope.HOPE.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/hope.html#HOPE.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.hope.HOPE.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.hope.HOPE.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/hope.html#HOPE.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.hope.HOPE.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.hope.HOPE.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/hope.html#HOPE.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.hope.HOPE.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.jc">
+<span id="jaccard-coefficient"></span><h2>Jaccard Coefficient<a class="headerlink" href="#module-gemben.embedding.jc" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.jc.JaccardCoefficient">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.jc.</code><code class="sig-name descname">JaccardCoefficient</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/jc.html#JaccardCoefficient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.jc.JaccardCoefficient" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://dl.acm.org/citation.cfm?id=576628">Jaccard Coefficient</a>.</p>
+<p>Jaccard Coefficient measures the probability that
+two nodes <span class="math">i</span> and <span class="math">j</span> have a connection to node <span class="math">k</span>,
+for a randomly selected node $k$ from the neighbors of <span class="math">i</span> and <span class="math">j</span> .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.jc</span> <span class="k">import</span> <span class="n">JaccardCoefficient</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">JaccardCoefficient</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="go">                          is_weighted=True, no_python=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adamic Adar:Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.jc.JaccardCoefficient.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/jc.html#JaccardCoefficient.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.jc.JaccardCoefficient.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.jc.JaccardCoefficient.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/jc.html#JaccardCoefficient.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.jc.JaccardCoefficient.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.jc.JaccardCoefficient.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/jc.html#JaccardCoefficient.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.jc.JaccardCoefficient.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.jc.JaccardCoefficient.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/jc.html#JaccardCoefficient.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.jc.JaccardCoefficient.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.jc.JaccardCoefficient.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/jc.html#JaccardCoefficient.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.jc.JaccardCoefficient.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.jc.JaccardCoefficient.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/jc.html#JaccardCoefficient.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.jc.JaccardCoefficient.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.lap">
+<span id="laplacian-eigenmaps"></span><h2>Laplacian Eigenmaps<a class="headerlink" href="#module-gemben.embedding.lap" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.lap.LaplacianEigenmaps">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.lap.</code><code class="sig-name descname">LaplacianEigenmaps</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lap.html#LaplacianEigenmaps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lap.LaplacianEigenmaps" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://web.cse.ohio-state.edu/~belkin.8/papers/LEM_NIPS_01.pdf">Laplacian Eigenmaps</a>.</p>
+<p>LaplacianEigenmaps  penalizes the weighted square of
+distance between neighbors. This is equivalent to factorizing
+the normalized Laplacian matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.lap</span> <span class="k">import</span> <span class="n">LaplacianEigenmaps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">LaplacianEigenmaps</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="go">                          is_weighted=True, no_python=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Laplacian Eigenmaps:Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(),</span>
+<span class="go">                     di_graph=G, node_colors=None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.lap.LaplacianEigenmaps.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lap.html#LaplacianEigenmaps.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lap.LaplacianEigenmaps.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lap.LaplacianEigenmaps.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lap.html#LaplacianEigenmaps.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lap.LaplacianEigenmaps.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lap.LaplacianEigenmaps.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lap.html#LaplacianEigenmaps.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lap.LaplacianEigenmaps.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lap.LaplacianEigenmaps.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lap.html#LaplacianEigenmaps.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lap.LaplacianEigenmaps.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lap.LaplacianEigenmaps.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lap.html#LaplacianEigenmaps.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lap.LaplacianEigenmaps.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lap.LaplacianEigenmaps.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lap.html#LaplacianEigenmaps.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lap.LaplacianEigenmaps.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.lle">
+<span id="locally-linear-embedding"></span><h2>Locally Linear Embedding<a class="headerlink" href="#module-gemben.embedding.lle" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.lle.LocallyLinearEmbedding">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.lle.</code><code class="sig-name descname">LocallyLinearEmbedding</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lle.html#LocallyLinearEmbedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lle.LocallyLinearEmbedding" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://science.sciencemag.org/content/290/5500/2323">Locally Linear Embedding</a>.</p>
+<p>Locally Linear Embedding uses <span class="math">d</span> eigenvectors corresponding to
+eigenvalues from second smallest to <span class="math">(d+1)^{th}</span> smallest
+from the sparse matrix <span class="math">(I-W)^\intercal(I-W)</span>. It assumes
+that the embedding of each node is a linear weighted combination
+of the neighbor’s embeddings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.lle</span> <span class="k">import</span> <span class="n">LocallyLinearEmbedding</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">LocallyLinearEmbedding</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="go">                          is_weighted=True, no_python=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph Factorization:Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(),</span>
+<span class="go">                     di_graph=G, node_colors=None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.lle.LocallyLinearEmbedding.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lle.html#LocallyLinearEmbedding.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lle.LocallyLinearEmbedding.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lle.LocallyLinearEmbedding.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lle.html#LocallyLinearEmbedding.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lle.LocallyLinearEmbedding.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lle.LocallyLinearEmbedding.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lle.html#LocallyLinearEmbedding.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lle.LocallyLinearEmbedding.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lle.LocallyLinearEmbedding.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lle.html#LocallyLinearEmbedding.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lle.LocallyLinearEmbedding.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lle.LocallyLinearEmbedding.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lle.html#LocallyLinearEmbedding.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lle.LocallyLinearEmbedding.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.lle.LocallyLinearEmbedding.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/lle.html#LocallyLinearEmbedding.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.lle.LocallyLinearEmbedding.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.node2vec">
+<span id="node2vec"></span><h2>node2vec<a class="headerlink" href="#module-gemben.embedding.node2vec" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.node2vec.node2vec">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.node2vec.</code><code class="sig-name descname">node2vec</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/node2vec.html#node2vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.node2vec.node2vec" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://cs.stanford.edu/~jure/pubs/node2vec-kdd16.pdf">node2vec</a>.</p>
+<p>Node2Vec aim to learn a low-dimensional feature
+representation for nodes through a stream of random walks.
+These random walks explore the nodes’ variant neighborhoods.
+Thus, random walk based methods are much more scalable for large
+graphs and they generate informative embeddings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.node2vec</span> <span class="k">import</span> <span class="n">node2vec</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">node2vec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="go">                          is_weighted=True, no_python=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;node2vec:Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(),</span>
+<span class="go">                     di_graph=G, node_colors=None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.node2vec.node2vec.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/node2vec.html#node2vec.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.node2vec.node2vec.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.node2vec.node2vec.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/node2vec.html#node2vec.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.node2vec.node2vec.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.node2vec.node2vec.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/node2vec.html#node2vec.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.node2vec.node2vec.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.node2vec.node2vec.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/node2vec.html#node2vec.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.node2vec.node2vec.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.node2vec.node2vec.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/node2vec.html#node2vec.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.node2vec.node2vec.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.node2vec.node2vec.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/node2vec.html#node2vec.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.node2vec.node2vec.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.pa">
+<span id="preferential-attachment"></span><h2>Preferential Attachment<a class="headerlink" href="#module-gemben.embedding.pa" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.pa.PreferentialAttachment">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.pa.</code><code class="sig-name descname">PreferentialAttachment</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/pa.html#PreferentialAttachment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.pa.PreferentialAttachment" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://science.sciencemag.org/content/286/5439/509">Preferential Attachment</a>.</p>
+<p>Preferential Attachment is based on the assumption that the connection to a
+node is proportional to its degree. It defines the similarity
+between the nodes as the product of their degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.pa</span> <span class="k">import</span> <span class="n">PreferentialAttachment</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">PreferentialAttachment</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="go">                          is_weighted=True, no_python=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PreferentialAttachment:Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(),</span>
+<span class="go">                     di_graph=G, node_colors=None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.pa.PreferentialAttachment.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/pa.html#PreferentialAttachment.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.pa.PreferentialAttachment.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.pa.PreferentialAttachment.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/pa.html#PreferentialAttachment.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.pa.PreferentialAttachment.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.pa.PreferentialAttachment.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/pa.html#PreferentialAttachment.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.pa.PreferentialAttachment.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.pa.PreferentialAttachment.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/pa.html#PreferentialAttachment.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.pa.PreferentialAttachment.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.pa.PreferentialAttachment.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/pa.html#PreferentialAttachment.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.pa.PreferentialAttachment.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.pa.PreferentialAttachment.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/pa.html#PreferentialAttachment.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.pa.PreferentialAttachment.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.rand">
+<span id="random-embedding"></span><h2>Random Embedding<a class="headerlink" href="#module-gemben.embedding.rand" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.rand.RandomEmb">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.rand.</code><code class="sig-name descname">RandomEmb</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/rand.html#RandomEmb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.rand.RandomEmb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random Embedding.</p>
+<p>It generates the random embedding for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.rand</span> <span class="k">import</span> <span class="n">RandomEmb</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_f</span> <span class="o">=</span> <span class="s1">&#39;data/karate.edgelist&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">loadGraphFromEdgeListTxt</span><span class="p">(</span><span class="n">edge_f</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res_pre</span> <span class="o">=</span> <span class="s1">&#39;results/testKarate&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">PreferentialAttachment</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="go">                          is_weighted=True, no_python=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PreferentialAttachment:Training time: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(),</span>
+<span class="go">                     di_graph=G, node_colors=None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.rand.RandomEmb.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/rand.html#RandomEmb.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.rand.RandomEmb.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.rand.RandomEmb.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/rand.html#RandomEmb.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.rand.RandomEmb.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.rand.RandomEmb.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/rand.html#RandomEmb.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.rand.RandomEmb.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.rand.RandomEmb.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/rand.html#RandomEmb.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.rand.RandomEmb.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.rand.RandomEmb.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X=None</em>, <em class="sig-param">node_l=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/rand.html#RandomEmb.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.rand.RandomEmb.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.rand.RandomEmb.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/rand.html#RandomEmb.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.rand.RandomEmb.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.sdne">
+<span id="sdne"></span><h2>SDNE<a class="headerlink" href="#module-gemben.embedding.sdne" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.sdne.SDNE">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.sdne.</code><code class="sig-name descname">SDNE</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/sdne.html#SDNE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.sdne.SDNE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://www.kdd.org/kdd2016/papers/files/rfp0191-wangAemb.pdf">SDNE</a>.</p>
+<p>SDNE uses a deep autoencoder to provide non-linear functions to preserve
+the first and second order proximities jointly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.sdne</span> <span class="k">import</span> <span class="n">SDNE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file_prefix</span> <span class="o">=</span> <span class="s2">&quot;gemben/data/sbm/graph.gpickle&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_gpickle</span><span class="p">(</span><span class="n">file_prefix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_colors</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+<span class="go">    open(&#39;gemben/data/sbm/node_labels.pickle&#39;, &#39;rb&#39;) )</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">SDNE</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">nu1</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">nu2</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+<span class="go">               K=3, n_units=[500, 300, ],</span>
+<span class="go">               n_iter=30, xeta=1e-3,</span>
+<span class="go">               n_batch=500,</span>
+<span class="go">               modelfile=[&#39;gemben/intermediate/enc_model.json&#39;,</span>
+<span class="go">                          &#39;gemben/intermediate/dec_model.json&#39;],</span>
+<span class="go">               weightfile=[&#39;gemben/intermediate/enc_weights.hdf5&#39;,</span>
+<span class="go">                           &#39;gemben/intermediate/dec_weights.hdf5&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G_X</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G_X_hat</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">get_reconstructed_adj</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rec_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">G_X</span> <span class="o">-</span> <span class="n">G_X_hat</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rec_norm</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_colors_arr</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">node_colors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">node_colors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="go">        node_colors_arr[idx] = np.where(node_colors[idx, :].toarray() == 1)[1][0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">G_X</span><span class="p">,</span>
+<span class="go">                         di_graph=G,</span>
+<span class="go">                         node_colors=node_colors_arr)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;sdne_sbm_g_x.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.sdne.SDNE.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em>, <em class="sig-param">embed=None</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/sdne.html#SDNE.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.sdne.SDNE.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.sdne.SDNE.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/sdne.html#SDNE.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.sdne.SDNE.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.sdne.SDNE.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/sdne.html#SDNE.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.sdne.SDNE.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.sdne.SDNE.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/sdne.html#SDNE.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.sdne.SDNE.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.sdne.SDNE.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">embed=None</em>, <em class="sig-param">node_l=None</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/sdne.html#SDNE.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.sdne.SDNE.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.sdne.SDNE.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/sdne.html#SDNE.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.sdne.SDNE.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.embedding.vae">
+<span id="variational-auto-encoder"></span><h2>Variational Auto-Encoder<a class="headerlink" href="#module-gemben.embedding.vae" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.embedding.vae.VAE">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.embedding.vae.</code><code class="sig-name descname">VAE</code><span class="sig-paren">(</span><em class="sig-param">*hyper_dict</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/vae.html#VAE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.vae.VAE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://arxiv.org/pdf/1611.07308.pdf">Variational Graph Auto-Encoders</a>.</p>
+<p>Variational Graph Auto-Encoders utilizes a GCN as encoder and inner product as decoder,
+which provides embedding with higher quality than autoencoders.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_dict</strong> (<em>object</em>) – Hyper parameters.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments, form updating the parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gemben.embedding.vae</span> <span class="k">import</span> <span class="n">VAE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file_prefix</span> <span class="o">=</span> <span class="s2">&quot;gemben/data/sbm/graph.gpickle&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_gpickle</span><span class="p">(</span><span class="n">file_prefix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_colors</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+<span class="go">    open(&#39;gemben/data/sbm/node_labels.pickle&#39;, &#39;rb&#39;) )</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">VAE</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">nu1</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">nu2</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+<span class="go">                K=3, n_units=[300, 100, ],</span>
+<span class="go">                beta_vae=10.0,</span>
+<span class="go">                n_iter=500, xeta=1e-3,</span>
+<span class="go">                n_batch=500,</span>
+<span class="go">                modelfile=[&#39;gemben/intermediate/enc_model.json&#39;,</span>
+<span class="go">                           &#39;gemben/intermediate/dec_model.json&#39;],</span>
+<span class="go">                weightfile=[&#39;gemben/intermediate/enc_weights.hdf5&#39;,</span>
+<span class="go">                            &#39;gemben/intermediate/dec_weights.hdf5&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">highest_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">mi</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">highest_z_highest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">highest_z</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">highest_z_lowest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">highest_z</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:</span><span class="mi">512</span><span class="p">,</span> <span class="n">highest_z</span><span class="p">]</span> <span class="o">=</span> <span class="n">highest_z_lowest</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">X</span><span class="p">[</span><span class="mi">512</span><span class="p">:,</span> <span class="n">highest_z</span><span class="p">]</span> <span class="o">=</span> <span class="n">highest_z_highest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mi2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mi</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G_X_hat</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">get_reconstructed_adj</span><span class="p">(</span><span class="n">embed</span><span class="o">=</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_colors_arr</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">node_colors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">node_colors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="go">        node_colors_arr[idx] = np.where(node_colors[idx, :].toarray() == 1)[1][0]</span>
+<span class="go">        MAP, prec_curv, err, err_baseline = gr.evaluateStaticGraphReconstruction(</span>
+<span class="go">        G, embedding, X, None )</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MAP:&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">MAP</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span> <span class="n">G_X_hat</span><span class="p">,</span>
+<span class="go">                        di_graph=G,</span>
+<span class="go">                        node_colors=node_colors_arr )</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;vae_sbm_g_x_hat.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot_embedding2D</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+<span class="go">                         di_graph=G,</span>
+<span class="go">                         node_colors=node_colors_arr )</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;vae_sbm_z.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="gemben.embedding.vae.VAE.get_edge_weight">
+<code class="sig-name descname">get_edge_weight</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em>, <em class="sig-param">embed=None</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/vae.html#VAE.get_edge_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.vae.VAE.get_edge_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the weight for edge between node i and node j</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>j</strong> (<em>i</em><em>,</em>) – two node id in the graph for embedding</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A single number represent the weight of edge between node i and node j</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.vae.VAE.get_embedding">
+<code class="sig-name descname">get_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/vae.html#VAE.get_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.vae.VAE.get_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the learnt embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.vae.VAE.get_method_name">
+<code class="sig-name descname">get_method_name</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/vae.html#VAE.get_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.vae.VAE.get_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name for the embedding method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.vae.VAE.get_method_summary">
+<code class="sig-name descname">get_method_summary</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/vae.html#VAE.get_method_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.vae.VAE.get_method_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary for the embedding include method name and paramater setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A summary string of the method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.vae.VAE.get_reconstructed_adj">
+<code class="sig-name descname">get_reconstructed_adj</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">embed=None</em>, <em class="sig-param">node_l=None</em>, <em class="sig-param">filesuffix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/vae.html#VAE.get_reconstructed_adj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.vae.VAE.get_reconstructed_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the adjacency matrix from the learned embedding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A numpy array of size #nodes * #nodes containing the reconstructed adjacency matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gemben.embedding.vae.VAE.learn_embedding">
+<code class="sig-name descname">learn_embedding</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">graph=None</em>, <em class="sig-param">edge_f=None</em>, <em class="sig-param">is_weighted=False</em>, <em class="sig-param">no_python=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/embedding/vae.html#VAE.learn_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.embedding.vae.VAE.learn_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learning the graph embedding from the adjcency matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> – the graph to embed in networkx DiGraph format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="gemben-utility-function">
+<h1>gemben utility function<a class="headerlink" href="#gemben-utility-function" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-gemben.embedding.sdne_utils">
+<span id="static-graph-embedding-utils"></span><h2>Static Graph Embedding utils<a class="headerlink" href="#module-gemben.embedding.sdne_utils" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.evaluation.visualize_embedding">
+<span id="visualization"></span><h2>Visualization<a class="headerlink" href="#module-gemben.evaluation.visualize_embedding" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.utils.embed_util">
+<span id="embeding-utility-function"></span><h2>Embeding Utility Function<a class="headerlink" href="#module-gemben.utils.embed_util" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.utils.bayesian_opt">
+<span id="bayesian-optimizer"></span><h2>Bayesian Optimizer<a class="headerlink" href="#module-gemben.utils.bayesian_opt" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.utils.bayesian_opt.BayesianOpt">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.utils.bayesian_opt.</code><code class="sig-name descname">BayesianOpt</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/utils/bayesian_opt.html#BayesianOpt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.utils.bayesian_opt.BayesianOpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>bayesian global optimization with Gaussian Process</p>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 68%" />
+<col style="width: 32%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>optimization_func</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>optimize</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>search_space</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.utils.bayesian_opt">
+<span id="evaluation-utility-function"></span><h2>Evaluation Utility Function<a class="headerlink" href="#module-gemben.utils.bayesian_opt" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">gemben.utils.bayesian_opt.</code><code class="sig-name descname">BayesianOpt</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/utils/bayesian_opt.html#BayesianOpt"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>bayesian global optimization with Gaussian Process</p>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 68%" />
+<col style="width: 32%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>optimization_func</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>optimize</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>search_space</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="graph-generation-functions">
+<h2>Graph Generation Functions<a class="headerlink" href="#graph-generation-functions" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.utils.graph_util">
+<span id="graph-utility-functions"></span><h2>Graph Utility Functions<a class="headerlink" href="#module-gemben.utils.graph_util" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.utils.kronecker_generator">
+<span id="kronecker-graph-generator"></span><h2>Kronecker Graph Generator<a class="headerlink" href="#module-gemben.utils.kronecker_generator" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.utils.kronecker_init_matrix">
+<span id="kronecker-matrix-initializer"></span><h2>Kronecker Matrix Initializer<a class="headerlink" href="#module-gemben.utils.kronecker_init_matrix" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.utils.lrf_gen">
+<span id="lrf-graph-generator"></span><h2>lrf graph generator<a class="headerlink" href="#module-gemben.utils.lrf_gen" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.utils.plot_util">
+<span id="plotting-utility-function"></span><h2>Plotting Utility Function<a class="headerlink" href="#module-gemben.utils.plot_util" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="evaluation-module">
+<h1>Evaluation Module<a class="headerlink" href="#evaluation-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-gemben.evaluation.evaluate_graph_reconstruction">
+<span id="graph-reconstruction"></span><h2>Graph Reconstruction<a class="headerlink" href="#module-gemben.evaluation.evaluate_graph_reconstruction" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.evaluation.evaluate_link_prediction">
+<span id="link-prediction"></span><h2>Link Prediction<a class="headerlink" href="#module-gemben.evaluation.evaluate_link_prediction" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gemben.evaluation.evaluate_node_classification">
+<span id="node-classification"></span><h2>Node Classification<a class="headerlink" href="#module-gemben.evaluation.evaluate_node_classification" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gemben.evaluation.evaluate_node_classification.TopKRanker">
+<em class="property">class </em><code class="sig-prename descclassname">gemben.evaluation.evaluate_node_classification.</code><code class="sig-name descname">TopKRanker</code><span class="sig-paren">(</span><em class="sig-param">estimator</em>, <em class="sig-param">n_jobs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/evaluation/evaluate_node_classification.html#TopKRanker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.evaluation.evaluate_node_classification.TopKRanker" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>coef_</strong></dt><dd></dd>
+<dt><strong>intercept_</strong></dt><dd></dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">multilabel_</span></code></dt><dd><p>Whether this is a multilabel classifier</p>
+</dd>
+<dt><strong>n_classes_</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">decision_function</span></code>(self, X)</p></td>
+<td><p>Returns the distance of each sample from the decision boundary for each class.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(self, X, y)</p></td>
+<td><p>Fit underlying estimators.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>(self[, deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_fit</span></code>(self, X, y[, classes])</p></td>
+<td><p>Partially fit underlying estimators</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gemben.evaluation.evaluate_node_classification.TopKRanker.predict" title="gemben.evaluation.evaluate_node_classification.TopKRanker.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(self, X, top_k_list)</p></td>
+<td><p>Predict multi-class targets using underlying estimators.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_proba</span></code>(self, X)</p></td>
+<td><p>Probability estimates.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(self, X, y[, sample_weight])</p></td>
+<td><p>Returns the mean accuracy on the given test data and labels.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(self, \*\*params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="gemben.evaluation.evaluate_node_classification.TopKRanker.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">X</em>, <em class="sig-param">top_k_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gemben/evaluation/evaluate_node_classification.html#TopKRanker.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gemben.evaluation.evaluate_node_classification.TopKRanker.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict multi-class targets using underlying estimators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>X</strong><span class="classifier">(sparse) array-like, shape = [n_samples, n_features]</span></dt><dd><p>Data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>y</strong><span class="classifier">(sparse) array-like, shape = [n_samples, ], [n_samples, n_classes].</span></dt><dd><p>Predicted multi-class targets.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gemben.evaluation.metrics">
+<span id="evaluation-metrics"></span><h2>Evaluation Metrics<a class="headerlink" href="#module-gemben.evaluation.metrics" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="experiment-module">
+<h1>Experiment Module<a class="headerlink" href="#experiment-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-gemben.experiments.exp">
+<span id="simple-experiments"></span><h2>Simple Experiments<a class="headerlink" href="#module-gemben.experiments.exp" title="Permalink to this headline">¶</a></h2>
+<p>A simple experiment to run the gemben library.</p>
+</div>
+<div class="section" id="module-gemben.experiments.exp_bay">
+<span id="bayesian-hyperparameter-optimizer"></span><h2>Bayesian Hyperparameter Optimizer<a class="headerlink" href="#module-gemben.experiments.exp_bay" title="Permalink to this headline">¶</a></h2>
+<p>Experiment to utilize the bayesian hyperparameter tuning for the algorithms.</p>
+</div>
+<div class="section" id="full-experiments-with-benchmark">
+<h2>Full Experiments with Benchmark<a class="headerlink" href="#full-experiments-with-benchmark" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="dataset.html" class="btn btn-neutral float-left" title="Benchmark Dataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bayesian Hyerparameter tuning &mdash; gemben 0.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Authors" href="../authors.html" />
+    <link rel="prev" title="Simple Experiment" href="exp.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> gemben
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dependency.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../challenge.html">Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contibution.html">Why this Benchmark Package?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../organization.html">Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gem_ben.html">GEM-Benchmark</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Dataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataset.html">Benchmark Dataset</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">Baseline Graph Embedding Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html#gemben-utility-function">gemben utility function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html#evaluation-module">Evaluation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html#experiment-module">Experiment Module</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial - Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">General examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="exp_benchmark.html">Experiment with Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exp_benchmark2.html">Experiment with Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exp.html">Simple Experiment</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Bayesian Hyerparameter tuning</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Addtional Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citations.html">Citing gemben</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gemben</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">General examples</a> &raquo;</li>
+        
+      <li>Bayesian Hyerparameter tuning</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/auto_examples/exp_bay.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-exp-bay-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="bayesian-hyerparameter-tuning">
+<span id="sphx-glr-auto-examples-exp-bay-py"></span><h1>Bayesian Hyerparameter tuning<a class="headerlink" href="#bayesian-hyerparameter-tuning" title="Permalink to this headline">¶</a></h1>
+<p>Experiment to utilize the bayesian hyperparameter tuning for the algorithms.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span> <span class="kn">import</span> <span class="nn">cPickle</span> <span class="k">as</span> <span class="nn">pickle</span>
+<span class="k">except</span><span class="p">:</span> <span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="k">import</span> <span class="n">ArgumentParser</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="c1"># import cPickle</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">pdb</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># sys.path.insert(0, &#39;./&#39;)</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">gemben.utils</span>      <span class="k">import</span> <span class="n">graph_util</span><span class="p">,</span> <span class="n">plot_util</span>
+<span class="kn">from</span> <span class="nn">gemben.evaluation</span> <span class="k">import</span> <span class="n">visualize_embedding</span> <span class="k">as</span> <span class="n">viz</span>
+<span class="kn">from</span> <span class="nn">gemben.evaluation.evaluate_graph_reconstruction</span> <span class="k">import</span> <span class="n">expGR</span>
+<span class="kn">from</span> <span class="nn">gemben.evaluation.evaluate_link_prediction</span> <span class="k">import</span> <span class="n">expLP</span><span class="p">,</span> <span class="n">expLPT</span>
+<span class="kn">from</span> <span class="nn">gemben.evaluation.evaluate_node_classification</span> <span class="k">import</span> <span class="n">expNC</span>
+<span class="kn">from</span> <span class="nn">gemben.evaluation.visualize_embedding</span> <span class="k">import</span> <span class="n">expVis</span>
+
+<span class="kn">from</span> <span class="nn">gemben.utils.bayesian_opt</span> <span class="k">import</span> <span class="n">BayesianOpt</span>
+
+
+<span class="n">methClassMap</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;gf&quot;</span><span class="p">:</span> <span class="s2">&quot;GraphFactorization&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;hope&quot;</span><span class="p">:</span> <span class="s2">&quot;HOPE&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;lap&quot;</span><span class="p">:</span> <span class="s2">&quot;LaplacianEigenmaps&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;node2vec&quot;</span><span class="p">:</span> <span class="s2">&quot;node2vec&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;sdne&quot;</span><span class="p">:</span> <span class="s2">&quot;SDNE&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pa&quot;</span><span class="p">:</span> <span class="s2">&quot;PreferentialAttachment&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;rand&quot;</span><span class="p">:</span> <span class="s2">&quot;RandomEmb&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;cn&quot;</span><span class="p">:</span> <span class="s2">&quot;CommonNeighbors&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;aa&quot;</span><span class="p">:</span> <span class="s2">&quot;AdamicAdar&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;jc&quot;</span><span class="p">:</span> <span class="s2">&quot;JaccardCoefficient&quot;</span><span class="p">}</span>
+<span class="n">expMap</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;gf&quot;</span><span class="p">:</span> <span class="s2">&quot;GF MAP&quot;</span><span class="p">,</span> <span class="s2">&quot;lp&quot;</span><span class="p">:</span> <span class="s2">&quot;LP MAP&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;nc&quot;</span><span class="p">:</span> <span class="s2">&quot;NC MAP&quot;</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">learn_emb</span><span class="p">(</span><span class="n">MethObj</span><span class="p">,</span> <span class="n">di_graph</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">res_pre</span><span class="p">,</span> <span class="n">m_summ</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;lp&quot;</span><span class="p">]:</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Learning Embedding: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">m_summ</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;load_emb&quot;</span><span class="p">])):</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">learn_t</span> <span class="o">=</span> <span class="n">MethObj</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">di_graph</span><span class="p">,</span>
+                                                 <span class="n">edge_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                                 <span class="n">no_python</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Time to learn embedding: </span><span class="si">%f</span><span class="s1"> sec&#39;</span> <span class="o">%</span> <span class="n">learn_t</span><span class="p">)</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">.emb&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res_pre</span><span class="p">,</span> <span class="n">m_summ</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">learn_t</span><span class="p">,</span>
+                        <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">.learnT&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res_pre</span><span class="p">,</span> <span class="n">m_summ</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">.emb&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res_pre</span><span class="p">,</span> <span class="n">m_summ</span><span class="p">),</span>
+                                 <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">learn_t</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">.learnT&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res_pre</span><span class="p">,</span> <span class="n">m_summ</span><span class="p">),</span>
+                                           <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Time to learn emb.: </span><span class="si">%f</span><span class="s1"> sec&#39;</span> <span class="o">%</span> <span class="n">learn_t</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Time info not found&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X</span>
+
+
+<span class="k">def</span> <span class="nf">run_exps</span><span class="p">(</span><span class="n">MethObj</span><span class="p">,</span> <span class="n">meth</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">di_graph</span><span class="p">,</span> <span class="n">data_set</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">m_summ</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">meth</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+    <span class="n">res_pre</span> <span class="o">=</span> <span class="s2">&quot;gemben/results/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">data_set</span>
+    <span class="n">n_r</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;rounds&quot;</span><span class="p">]</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">learn_emb</span><span class="p">(</span><span class="n">MethObj</span><span class="p">,</span> <span class="n">di_graph</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">res_pre</span><span class="p">,</span> <span class="n">m_summ</span><span class="p">)</span>
+    <span class="n">gr</span><span class="p">,</span> <span class="n">lp</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_r</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_r</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_r</span>
+    <span class="k">if</span> <span class="s2">&quot;gr&quot;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]:</span>
+        <span class="n">gr</span> <span class="o">=</span> <span class="n">expGR</span><span class="p">(</span><span class="n">di_graph</span><span class="p">,</span> <span class="n">MethObj</span><span class="p">,</span>
+                   <span class="n">X</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;n_sample_nodes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span>
+                   <span class="n">n_r</span><span class="p">,</span> <span class="n">res_pre</span><span class="p">,</span>
+                   <span class="n">m_summ</span><span class="p">,</span> <span class="n">is_undirected</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;is_undirected&quot;</span><span class="p">],</span>
+                   <span class="n">sampling_scheme</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;samp_scheme&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s2">&quot;lpt&quot;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]:</span>
+        <span class="n">expLPT</span><span class="p">(</span><span class="n">di_graph</span><span class="p">,</span> <span class="n">MethObj</span><span class="p">,</span> <span class="n">res_pre</span><span class="p">,</span> <span class="n">m_summ</span><span class="p">,</span>
+               <span class="n">is_undirected</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;is_undirected&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s2">&quot;lp&quot;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]:</span>
+        <span class="n">lp</span> <span class="o">=</span> <span class="n">expLP</span><span class="p">(</span><span class="n">di_graph</span><span class="p">,</span> <span class="n">MethObj</span><span class="p">,</span>
+                   <span class="n">params</span><span class="p">[</span><span class="s2">&quot;n_sample_nodes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span>
+                   <span class="n">n_r</span><span class="p">,</span> <span class="n">res_pre</span><span class="p">,</span>
+                   <span class="n">m_summ</span><span class="p">,</span> <span class="n">is_undirected</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;is_undirected&quot;</span><span class="p">],</span>
+                   <span class="n">sampling_scheme</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;samp_scheme&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s2">&quot;nc&quot;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="s2">&quot;nc_test_ratio_arr&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;NC test ratio not provided&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="n">expNC</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;nc_test_ratio_arr&quot;</span><span class="p">],</span>
+                       <span class="n">n_r</span><span class="p">,</span> <span class="n">res_pre</span><span class="p">,</span>
+                       <span class="n">m_summ</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;viz&quot;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">MethObj</span><span class="o">.</span><span class="n">get_method_name</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;hope_gsvd&#39;</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">expVis</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="p">:</span><span class="n">d</span><span class="p">],</span> <span class="n">res_pre</span><span class="p">,</span> <span class="n">m_summ</span><span class="p">,</span>
+                   <span class="n">node_labels</span><span class="o">=</span><span class="n">node_labels</span><span class="p">,</span> <span class="n">di_graph</span><span class="o">=</span><span class="n">di_graph</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">expVis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">res_pre</span><span class="p">,</span> <span class="n">m_summ</span><span class="p">,</span>
+                   <span class="n">node_labels</span><span class="o">=</span><span class="n">node_labels</span><span class="p">,</span> <span class="n">di_graph</span><span class="o">=</span><span class="n">di_graph</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gr</span><span class="p">,</span> <span class="n">lp</span><span class="p">,</span> <span class="n">nc</span>
+
+
+<span class="k">def</span> <span class="nf">get_max</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">val_max</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">idx_max</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">val_max</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">val</span><span class="p">,</span> <span class="n">idx</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">val_max</span><span class="p">,</span> <span class="n">idx_max</span>
+
+
+<span class="k">def</span> <span class="nf">bayesian_optimization</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">di_graph</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Load range of hyper parameters</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">model_hyp_range</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/</span><span class="si">%s</span><span class="s1">_hypRange.conf&#39;</span> <span class="o">%</span> <span class="n">data_set</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+        <span class="n">model_hyp_range</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/default_hypRange.conf&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="n">params</span><span class="p">[</span><span class="s1">&#39;model_hyp_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_hyp_range</span>
+    <span class="n">params</span><span class="p">[</span><span class="s1">&#39;data_set&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_set</span>
+    <span class="n">params</span><span class="p">[</span><span class="s1">&#39;di_graph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">di_graph</span>
+
+    <span class="c1">## test for gf</span>
+    <span class="c1">#pdb.set_trace()</span>
+    <span class="n">bayesian_opt</span> <span class="o">=</span> <span class="n">BayesianOpt</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">bayesian_opt</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+
+
+
+<span class="k">def</span> <span class="nf">choose_best_hyp</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">di_graph</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Load range of hyper parameters to test on</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">model_hyp_range</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/</span><span class="si">%s</span><span class="s1">_hypRange.conf&#39;</span> <span class="o">%</span> <span class="n">data_set</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+        <span class="n">model_hyp_range</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/default_hypRange.conf&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;gemben/temp_hyp_res&quot;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="c1"># Test each hyperparameter for each method and store the best</span>
+    <span class="k">for</span> <span class="n">meth</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">]:</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;dimensions&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">MethClass</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
+            <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;gem.embedding.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">meth</span><span class="p">),</span>
+            <span class="n">methClassMap</span><span class="p">[</span><span class="n">meth</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">meth_hyp_range</span> <span class="o">=</span> <span class="n">model_hyp_range</span><span class="p">[</span><span class="n">meth</span><span class="p">]</span>
+        <span class="n">gr_max</span><span class="p">,</span> <span class="n">lp_max</span><span class="p">,</span> <span class="n">nc_max</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">gr_hyp</span><span class="p">,</span> <span class="n">lp_hyp</span><span class="p">,</span> <span class="n">nc_hyp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">gr_hyp</span><span class="p">,</span> <span class="n">lp_hyp</span><span class="p">,</span> <span class="n">nc_hyp</span> <span class="o">=</span> <span class="p">{</span><span class="n">meth</span><span class="p">:</span> <span class="p">{}},</span> <span class="p">{</span><span class="n">meth</span><span class="p">:</span> <span class="p">{}},</span> <span class="p">{</span><span class="n">meth</span><span class="p">:</span> <span class="p">{}}</span>
+
+        <span class="c1"># Test each hyperparameter</span>
+        <span class="n">ev_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GR MAP&quot;</span><span class="p">,</span> <span class="s2">&quot;LP MAP&quot;</span><span class="p">,</span> <span class="s2">&quot;NC F1 score&quot;</span><span class="p">]</span>
+        <span class="n">hyp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">meth_hyp_range</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="n">ev_cols</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Round Id&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">hyp_r_idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">hyp</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">meth_hyp_range</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="n">hyp_d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="n">dim</span><span class="p">}</span>
+            <span class="n">hyp_d</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">meth_hyp_range</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">hyp</span><span class="p">)))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">hyp_d</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">meth</span> <span class="o">==</span> <span class="s2">&quot;sdne&quot;</span><span class="p">:</span>
+                <span class="n">hyp_d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                    <span class="s2">&quot;modelfile&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="s2">&quot;gemben/intermediate/enc_mdl_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.json&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span>
+                        <span class="s2">&quot;gemben/intermediate/dec_mdl_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.json&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;weightfile&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="s2">&quot;gemben/intermediate/enc_wts_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.hdf5&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span>
+                        <span class="s2">&quot;gemben/intermediate/dec_wts_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.hdf5&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+                    <span class="p">]</span>
+                <span class="p">})</span>
+            <span class="k">elif</span> <span class="n">meth</span> <span class="o">==</span> <span class="s2">&quot;gf&quot;</span> <span class="ow">or</span> <span class="n">meth</span> <span class="o">==</span> <span class="s2">&quot;node2vec&quot;</span><span class="p">:</span>
+                <span class="n">hyp_d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;data_set&quot;</span><span class="p">:</span> <span class="n">data_set</span><span class="p">})</span>
+            <span class="n">MethObj</span> <span class="o">=</span> <span class="n">MethClass</span><span class="p">(</span><span class="n">hyp_d</span><span class="p">)</span>
+            <span class="n">gr</span><span class="p">,</span> <span class="n">lp</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">run_exps</span><span class="p">(</span><span class="n">MethObj</span><span class="p">,</span> <span class="n">meth</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">di_graph</span><span class="p">,</span>
+                                  <span class="n">data_set</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            <span class="n">gr_m</span><span class="p">,</span> <span class="n">lp_m</span><span class="p">,</span> <span class="n">nc_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">gr</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lp</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">nc</span><span class="p">)</span>
+            <span class="n">gr_max</span><span class="p">,</span> <span class="n">gr_hyp</span><span class="p">[</span><span class="n">meth</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_max</span><span class="p">(</span><span class="n">gr_m</span><span class="p">,</span> <span class="n">gr_max</span><span class="p">,</span> <span class="n">hyp_d</span><span class="p">,</span> <span class="n">gr_hyp</span><span class="p">[</span><span class="n">meth</span><span class="p">])</span>
+            <span class="n">lp_max</span><span class="p">,</span> <span class="n">lp_hyp</span><span class="p">[</span><span class="n">meth</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_max</span><span class="p">(</span><span class="n">lp_m</span><span class="p">,</span> <span class="n">lp_max</span><span class="p">,</span> <span class="n">hyp_d</span><span class="p">,</span> <span class="n">lp_hyp</span><span class="p">[</span><span class="n">meth</span><span class="p">])</span>
+            <span class="n">nc_max</span><span class="p">,</span> <span class="n">nc_hyp</span><span class="p">[</span><span class="n">meth</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_max</span><span class="p">(</span><span class="n">nc_m</span><span class="p">,</span> <span class="n">nc_max</span><span class="p">,</span> <span class="n">hyp_d</span><span class="p">,</span> <span class="n">nc_hyp</span><span class="p">[</span><span class="n">meth</span><span class="p">])</span>
+            <span class="n">hyp_df_row</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">meth_hyp_range</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">hyp</span><span class="p">))</span>
+            <span class="n">f_hyp_temp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;gemben/temp_hyp_res/</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">.txt&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">meth</span><span class="p">),</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+            <span class="n">hyp_str</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="n">hyp_d</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="n">f_hyp_temp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: MAP: </span><span class="si">%f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hyp_str</span><span class="p">,</span> <span class="n">lp_max</span><span class="p">))</span>
+            <span class="n">f_hyp_temp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">r_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;rounds&quot;</span><span class="p">]):</span>
+                <span class="n">hyp_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">hyp_r_idx</span><span class="p">,</span> <span class="n">meth_hyp_range</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span> <span class="o">=</span> \
+                    <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">hyp_df_row</span><span class="p">)</span>
+                <span class="n">hyp_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">hyp_r_idx</span><span class="p">,</span> <span class="n">ev_cols</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Round Id&quot;</span><span class="p">]]</span> <span class="o">=</span> \
+                    <span class="p">[</span><span class="n">gr</span><span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">r_id</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gr</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">lp</span><span class="p">[</span><span class="n">r_id</span><span class="p">],</span> <span class="n">nc</span><span class="p">[</span><span class="n">r_id</span><span class="p">],</span> <span class="n">r_id</span><span class="p">]</span>
+                <span class="n">hyp_r_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">exp_param</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">exp_param</span><span class="p">:</span>
+            <span class="n">hyp_df</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span>
+                <span class="s2">&quot;gemben/intermediate/</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">_hyp.h5&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">meth</span><span class="p">,</span>
+                                                         <span class="n">exp</span><span class="p">,</span>
+                                                         <span class="n">params</span><span class="p">[</span><span class="s2">&quot;samp_scheme&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;df&quot;</span>
+            <span class="p">)</span>
+        <span class="c1">###plot_util.plot_hyp(meth_hyp_range.keys(), exp_param,</span>
+           <span class="c1">##:                meth, data_set, s_sch=params[&quot;samp_scheme&quot;])</span>
+
+        <span class="c1"># Store the best hyperparameter</span>
+        <span class="c1">####### put the file into synthetic</span>
+        <span class="n">opt_hyp_f_pre</span> <span class="o">=</span> <span class="s1">&#39;gemben/experiments/config/synthetic/</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="n">data_set</span><span class="p">,</span>
+            <span class="n">meth</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;samp_scheme&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">gr_max</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_gr.conf&#39;</span> <span class="o">%</span> <span class="n">opt_hyp_f_pre</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">gr_hyp</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">lp_max</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_lp.conf&#39;</span> <span class="o">%</span> <span class="n">opt_hyp_f_pre</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">lp_hyp</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">nc_max</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_nc.conf&#39;</span> <span class="o">%</span> <span class="n">opt_hyp_f_pre</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">nc_hyp</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">call_plot_hyp</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Load range of hyper parameters tested on to plot</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">model_hyp_range</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/</span><span class="si">%s</span><span class="s1">_hypRange.conf&#39;</span> <span class="o">%</span> <span class="n">data_set</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+        <span class="n">model_hyp_range</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/default_hypRange.conf&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">for</span> <span class="n">meth</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">]:</span>
+            <span class="n">meth_hyp_range</span> <span class="o">=</span> <span class="n">model_hyp_range</span><span class="p">[</span><span class="n">meth</span><span class="p">]</span>
+            <span class="n">exp_param</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]</span>
+            <span class="n">plot_util</span><span class="o">.</span><span class="n">plot_hyp</span><span class="p">(</span><span class="n">meth_hyp_range</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">exp_param</span><span class="p">,</span>
+                               <span class="n">meth</span><span class="p">,</span> <span class="n">data_set</span><span class="p">,</span>
+                               <span class="n">s_sch</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;samp_scheme&quot;</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">call_plot_hyp_all</span><span class="p">(</span><span class="n">data_sets</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Load range of hyper parameters tested on to plot</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">model_hyp_range</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/</span><span class="si">%s</span><span class="s1">_hypRange.conf&#39;</span> <span class="o">%</span> <span class="n">data_sets</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+        <span class="n">model_hyp_range</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/default_hypRange.conf&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">for</span> <span class="n">meth</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">]:</span>
+            <span class="n">meth_hyp_range</span> <span class="o">=</span> <span class="n">model_hyp_range</span><span class="p">[</span><span class="n">meth</span><span class="p">]</span>
+            <span class="n">exp_param</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]</span>
+            <span class="n">plot_util</span><span class="o">.</span><span class="n">plot_hyp_all</span><span class="p">(</span><span class="n">meth_hyp_range</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">exp_param</span><span class="p">,</span>
+                                   <span class="n">meth</span><span class="p">,</span> <span class="n">data_sets</span><span class="p">,</span>
+                                   <span class="n">s_sch</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;samp_scheme&quot;</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">call_exps</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">data_set</span><span class="p">):</span>
+    <span class="c1"># Load Dataset</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dataset: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">data_set</span><span class="p">)</span>
+
+
+
+
+<span class="c1">########  for SBM, r_mat, hyperbolic</span>
+    <span class="c1">#if data_set[10:13] == &#39;r_m&#39; or data_set[10:13] == &#39;sto&#39; or data_set[10:13] == &#39;hyp&#39;:</span>
+     <span class="c1">#   di_graph = nx.read_gpickle(&#39;gem/data/%s/graph.gpickle&#39; % data_set)[0]</span>
+    <span class="c1">#else:</span>
+
+    <span class="c1">#di_graph = nx.read_gpickle(&#39;gem/data/%s/graph.gpickle&#39; % data_set)[0]</span>
+    <span class="n">di_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_gpickle</span><span class="p">(</span><span class="s1">&#39;gemben/data/</span><span class="si">%s</span><span class="s1">/graph.gpickle&#39;</span> <span class="o">%</span> <span class="n">data_set</span><span class="p">)</span>
+
+    <span class="n">di_graph</span><span class="p">,</span> <span class="n">nodeListMap</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">get_lcc</span><span class="p">(</span><span class="n">di_graph</span><span class="p">)</span>
+    <span class="n">graph_util</span><span class="o">.</span><span class="n">print_graph_stats</span><span class="p">(</span><span class="n">di_graph</span><span class="p">)</span>
+
+
+    <span class="c1"># Load node labels if given</span>
+    <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;node_labels&quot;</span><span class="p">]):</span>
+        <span class="n">node_labels</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/data/</span><span class="si">%s</span><span class="s1">/node_labels.pickle&#39;</span> <span class="o">%</span> <span class="n">data_set</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">node_labels_gc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">di_graph</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">(),</span> <span class="n">node_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nodeListMap</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">node_labels_gc</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">node_labels</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+            <span class="c1"># Already a numpy array</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="n">node_labels_gc</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">node_labels</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">node_labels</span> <span class="o">=</span> <span class="n">node_labels_gc</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">node_labels</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Search through the hyperparameter space</span>
+    <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;find_hyp&quot;</span><span class="p">]:</span>
+        <span class="c1">#choose_best_hyp(data_set, di_graph, node_labels, params)</span>
+        <span class="n">bayesian_optimization</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">di_graph</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+
+    <span class="c1"># Load best hyperparameter and test it again on new test data</span>
+    <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">meth</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;dimensions&quot;</span><span class="p">],</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">],</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">MethClass</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
+            <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;gemben.embedding.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">meth</span><span class="p">),</span>
+            <span class="n">methClassMap</span><span class="p">[</span><span class="n">meth</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">opt_hyp_f_pre</span> <span class="o">=</span> <span class="s1">&#39;gemben/experiments/config/synthetic/</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="n">data_set</span><span class="p">,</span>
+            <span class="n">meth</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;samp_scheme&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">exp</span> <span class="o">!=</span> <span class="s2">&quot;viz&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">exp</span> <span class="o">==</span> <span class="s1">&#39;lpt&#39;</span><span class="p">:</span>
+                    <span class="n">model_hyp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                        <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_lp.conf&#39;</span> <span class="o">%</span> <span class="n">opt_hyp_f_pre</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">model_hyp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                        <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">.conf&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">opt_hyp_f_pre</span><span class="p">,</span> <span class="n">exp</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+                    <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">model_hyp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                    <span class="nb">open</span><span class="p">(</span>
+                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">.conf&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">opt_hyp_f_pre</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;viz_params&quot;</span><span class="p">]),</span> <span class="s1">&#39;r&#39;</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default hyperparameter of the method chosen&#39;</span><span class="p">)</span>
+            <span class="n">model_hyp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/</span><span class="si">%s</span><span class="s1">.conf&#39;</span> <span class="o">%</span> <span class="n">meth</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">hyp</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">hyp</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">model_hyp</span><span class="p">[</span><span class="n">meth</span><span class="p">])</span>
+        <span class="n">hyp</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="n">dim</span><span class="p">})</span>
+        <span class="k">if</span> <span class="n">meth</span> <span class="o">==</span> <span class="s2">&quot;sdne&quot;</span><span class="p">:</span>
+                <span class="n">hyp</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                    <span class="s2">&quot;modelfile&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="s2">&quot;gemben/intermediate/en_mdl_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.json&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span>
+                        <span class="s2">&quot;gemben/intermediate/dec_mdl_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.json&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;weightfile&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="s2">&quot;gemben/intermediate/enc_wts_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.hdf5&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span>
+                        <span class="s2">&quot;gemben/intermediate/dec_wts_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.hdf5&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+                    <span class="p">]</span>
+                <span class="p">})</span>
+        <span class="k">elif</span> <span class="n">meth</span> <span class="o">==</span> <span class="s2">&quot;gf&quot;</span> <span class="ow">or</span> <span class="n">meth</span> <span class="o">==</span> <span class="s2">&quot;node2vec&quot;</span><span class="p">:</span>
+            <span class="n">hyp</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;data_set&quot;</span><span class="p">:</span> <span class="n">data_set</span><span class="p">})</span>
+        <span class="n">MethObj</span> <span class="o">=</span> <span class="n">MethClass</span><span class="p">(</span><span class="n">hyp</span><span class="p">)</span>
+        <span class="n">run_exps</span><span class="p">(</span><span class="n">MethObj</span><span class="p">,</span> <span class="n">meth</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">di_graph</span><span class="p">,</span> <span class="n">data_set</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39; Sample usage</span>
+<span class="sd">    python experiments/exp.py -data sbm -dim 128 -meth sdne -exp gr,lp</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Graph Embedding Experiments&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-data&#39;</span><span class="p">,</span> <span class="s1">&#39;--data_sets&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;dataset names (default: sbm)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-dim&#39;</span><span class="p">,</span> <span class="s1">&#39;--dimensions&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;embedding dimensions list(default: 2^1 to 2^8)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-meth&#39;</span><span class="p">,</span> <span class="s1">&#39;--methods&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;method list (default: all methods)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-exp&#39;</span><span class="p">,</span> <span class="s1">&#39;--experiments&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;exp list (default: gr,lp,viz,nc)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-lemb&#39;</span><span class="p">,</span> <span class="s1">&#39;--load_emb&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;load saved embeddings (default: False)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-lexp&#39;</span><span class="p">,</span> <span class="s1">&#39;--load_exp&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;load saved experiment results (default: False)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-node_labels&#39;</span><span class="p">,</span> <span class="s1">&#39;--node_labels&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;node labels available or not (default: False)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-rounds&#39;</span><span class="p">,</span> <span class="s1">&#39;--rounds&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;number of rounds (default: 5)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-plot&#39;</span><span class="p">,</span> <span class="s1">&#39;--plot&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;plot the results (default: True)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-plot_d&#39;</span><span class="p">,</span> <span class="s1">&#39;--plot_d&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;plot the results wrt dims(default: True)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-hyp_plot&#39;</span><span class="p">,</span> <span class="s1">&#39;--hyp_plot&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;plot the hyperparameter results (default: True)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-hyp_plot_all&#39;</span><span class="p">,</span> <span class="s1">&#39;--hyp_plot_all&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;plot the hyperparameter results (all) (default: True)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-viz_params&#39;</span><span class="p">,</span> <span class="s1">&#39;--viz_params&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;which params to use for viz (default: gr)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-find_hyp&#39;</span><span class="p">,</span> <span class="s1">&#39;--find_hyp&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;find best hyperparameters (default: False)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-saveMAP&#39;</span><span class="p">,</span> <span class="s1">&#39;--save_MAP&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;save MAP in a latex table (default: False)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-n_samples&#39;</span><span class="p">,</span> <span class="s1">&#39;--n_sample_nodes&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;number of sampled nodes (default: 1024)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-s_sch&#39;</span><span class="p">,</span> <span class="s1">&#39;--samp_scheme&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;sampling scheme (default: u_rand)&#39;</span><span class="p">)</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gemben/experiments/config/params.conf&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;data_sets&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;data_sets&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">]))</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;data_sets&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;data_sets&quot;</span><span class="p">]))</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;rounds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;rounds&quot;</span><span class="p">])</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;node_labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;node_labels&quot;</span><span class="p">])</span>
+    <span class="c1"># params[&quot;n_sample_nodes&quot;] = int(params[&quot;n_sample_nodes&quot;])</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;is_undirected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;is_undirected&quot;</span><span class="p">]))</span>
+
+
+
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;plot_d&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;plot_d&quot;</span><span class="p">]))</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;plot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;plot&quot;</span><span class="p">]))</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;hyp_plot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;hyp_plot&quot;</span><span class="p">]))</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;hyp_plot_all&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;hyp_plot_all&quot;</span><span class="p">]))</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;find_hyp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;find_hyp&quot;</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">methClassMap</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">]))</span>
+
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;dimensions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;dimensions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;dimensions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;dimensions&quot;</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s2">&quot;nc_test_ratio_arr&quot;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;nc_test_ratio_arr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;nc_test_ratio_arr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;nc_test_ratio_arr&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span> <span class="k">for</span> <span class="n">ratio</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;nc_test_ratio_arr&quot;</span><span class="p">]]</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;gemben/intermediate&quot;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;gemben/results&quot;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="k">pass</span>
+
+    <span class="k">for</span> <span class="n">data_set</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;data_sets&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;load_exp&quot;</span><span class="p">]):</span>
+            <span class="n">call_exps</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">data_set</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;plot&quot;</span><span class="p">]):</span>
+            <span class="n">res_pre</span> <span class="o">=</span> <span class="s2">&quot;gemben/results/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">data_set</span>
+            <span class="n">plot_util</span><span class="o">.</span><span class="n">plotExpRes</span><span class="p">(</span><span class="n">res_pre</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">],</span>
+                                 <span class="n">params</span><span class="p">[</span><span class="s2">&quot;experiments&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;dimensions&quot;</span><span class="p">],</span>
+                                 <span class="s1">&#39;gemben/plots/</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;samp_scheme&quot;</span><span class="p">]),</span>
+                                 <span class="n">params</span><span class="p">[</span><span class="s2">&quot;rounds&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;plot_d&quot;</span><span class="p">],</span>
+                                 <span class="n">params</span><span class="p">[</span><span class="s2">&quot;samp_scheme&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;hyp_plot&quot;</span><span class="p">]):</span>
+            <span class="n">call_plot_hyp</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;hyp_plot_all&quot;</span><span class="p">]):</span>
+            <span class="n">call_plot_hyp_all</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;data_sets&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-exp-bay-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/ca7a82d1e8073544fef9e207e86a031f/exp_bay.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">exp_bay.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/00acc62ca5bd9eadd3779450b8b77b15/exp_bay.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">exp_bay.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../authors.html" class="btn btn-neutral float-right" title="Authors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="exp.html" class="btn btn-neutral float-left" title="Simple Experiment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

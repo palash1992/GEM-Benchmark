@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Background &mdash; gemben 0.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GEM-Benchmark" href="gem_ben.html" />
+    <link rel="prev" title="Organization" href="organization.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> gemben
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dependency.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="challenge.html">Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contibution.html">Why this Benchmark Package?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">Organization</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#graph-embedding-methods">Graph Embedding Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#factorization-based-approaches">Factorization based approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#random-walk-approaches">Random walk approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#neural-network-approaches">Neural network approaches</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gem_ben.html">GEM-Benchmark</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Dataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Benchmark Dataset</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Baseline Graph Embedding Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#gemben-utility-function">gemben utility function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#evaluation-module">Evaluation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#experiment-module">Experiment Module</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial - Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">General examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Addtional Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citations.html">Citing gemben</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gemben</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Background</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/background.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="background">
+<h1>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h1>
+<p>This section introduces the notation used in this benchmark library, and provides a brief overview of graph embedding methods. In-depth analysis of graph embedding theory we refer the reader to <a class="reference external" href="https://arxiv.org/abs/1705.02801">here</a>.</p>
+<p><span class="math">G (V, E)</span> denotes a weighted graph where <span class="math">V</span> is the set of vertices and <span class="math">E</span> is the set of edges. We represent <span class="math">W</span> as the adjacency matrix of <span class="math">G</span>, where <span class="math">W_{ij} = 1</span> represents the presence of an edge between <span class="math">i</span> and <span class="math">j</span>. A graph embedding is a mapping <span class="math">f: V -&gt; \mathbb{R}^d</span>, where <span class="math">d  &lt;&lt; |V|</span> and the function <span class="math">f</span> preserves some proximity measure defined on graph <span class="math">G</span>. It aims to map similar nodes close to each other. Function <span class="math">f</span> when applied on the graph <span class="math">G</span> yields an embedding <span class="math">Y</span>.</p>
+<p>In this benchmark library, we evaluate four state-of-the-art graph embedding methods on a set of real graphs denoted by <span class="math">\mathcal{R}</span> and synthetic graphs denoted by <span class="math">\mathcal{S}</span>. To analyze the performance of methods, we categorize the graphs into a set of domains <span class="math">\mathcal{D} = \lbrace</span> Social, Economic, Biology, Technological:math:<cite>rbrace</cite>. The set of graphs in a domain <span class="math">D \in \mathcal{D}</span> is represented as <span class="math">\mathcal{R}_D</span>. We use multiple evaluation metrics on graph embedding methods to draw insights into each approach. We denote this set of metrics as <span class="math">\mathcal{M}</span>. The notations are summarized as follows:.</p>
+<ul class="simple">
+<li><p><span class="math">G</span> : Graphical representation of the data</p></li>
+<li><p><span class="math">E</span> : Set of edges in the graph</p></li>
+<li><p><span class="math">W</span> : Adjacency matrix of the graph, <span class="math">|V| \times |V|</span></p></li>
+<li><p><span class="math">f</span> : Embedding function</p></li>
+<li><p><span class="math">\mathcal{S}</span> : Set of synthetic graphs</p></li>
+<li><p><span class="math">\mathcal{R}_D</span> : Set of real graphs in domain <span class="math">D</span></p></li>
+<li><p><span class="math">\mathcal{D}</span> : Set of domains</p></li>
+<li><p><span class="math">\mathcal{M}</span> : Set of evaluation metrics</p></li>
+<li><p><span class="math">e_m</span> : Evaluation function for metric <span class="math">m</span></p></li>
+<li><p><span class="math">\mathcal{A}</span> : Set of graph and embedding attributes</p></li>
+<li><p><span class="math">d</span> : Number of embedding dimensions</p></li>
+<li><p><span class="math">Y</span> : Embedding of the graph, <span class="math">|V| \times d</span></p></li>
+</ul>
+<div class="section" id="graph-embedding-methods">
+<h2>Graph Embedding Methods<a class="headerlink" href="#graph-embedding-methods" title="Permalink to this headline">¶</a></h2>
+<p>Graph embedding methods embed graph vertices into a low-dimensional space. The goal of graph embedding is to preserve certain properties of the original graph such as distance between nodes and neighborhood structure. Based upon the function <span class="math">f</span> used for embedding the graph, existing methods can be classified into three categories: <strong>factorization based</strong>, <strong>random walk based</strong> and <strong>deep learning based</strong>.</p>
+</div>
+<div class="section" id="factorization-based-approaches">
+<h2>Factorization based approaches<a class="headerlink" href="#factorization-based-approaches" title="Permalink to this headline">¶</a></h2>
+<p>Factorization based approaches apply factorization on graph related matrices to obtain the node representation. Graph matrices such as the adjacency matrix, Laplacian matrix, and Katz similarity matrix contain information about node connectivity and the graph’s structure. Other matrix factorization approaches use the eigenvectors from spectral decomposition of a graph matrix as node embeddings. For example, to preserve locality, <a class="reference external" href="https://science.sciencemag.org/content/290/5500/2323">LLE</a> uses <span class="math">d</span> eigenvectors corresponding to eigenvalues from second smallest to <span class="math">(d+1)^{th}</span> smallest from the sparse matrix <span class="math">(I-W)^\intercal(I-W)</span>. It assumes that the embedding of each node is a linear weighted combination of the neighbor’s embeddings. <a class="reference external" href="http://web.cse.ohio-state.edu/~belkin.8/papers/LEM_NIPS_01.pdf">Laplacian Eigenmaps</a> take the first <span class="math">d</span> eigenvectors with the smallest eigenvalues of the normalized Laplacian <span class="math">D^{-1/2}LD^{-1/2}</span>. Both LLE and Laplacian Eigenmaps were designed to preserve the local geometric relationships of the data. Another type of matrix factorization methods learn node embeddings under different optimization functions in order to preserve certain properties. <a class="reference external" href="http://www.cs.columbia.edu/~jebara/papers/spe-icml09.pdf">Structural Preserving Embedding</a> builds upon Laplacian Eigenmaps to recover the original graph. <a class="reference external" href="http://www.icml-2011.org/papers/353_icmlpaper.pdf">Cauchy Graph Embedding</a> uses a quadratic distance formula in the objective function to emphasize similar nodes instead of dissimilar nodes. <a class="reference external" href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/40839.pdf">Graph Factorization</a>  uses an approximation function to factorize the adjacency matrix in a more scalable manner. <a class="reference external" href="https://pdfs.semanticscholar.org/1a37/f07606d60df365d74752857e8ce909f700b3.pdf">GraRep</a> and <a class="reference external" href="https://www.kdd.org/kdd2016/papers/files/rfp0184-ouA.pdf">HOPE</a> were invented to keep the high order proximity in the graph. Factorization based approaches have been widely used in practical applications due to their scalability. The methods are also easy to implement and can yield quick insights into the data set.</p>
+</div>
+<div class="section" id="random-walk-approaches">
+<h2>Random walk approaches<a class="headerlink" href="#random-walk-approaches" title="Permalink to this headline">¶</a></h2>
+<p>Random walk based algorithms are more flexible than factorization methods to explore the local neighborhood of a node for high-order proximity preservation. <a class="reference external" href="https://arxiv.org/pdf/1403.6652.pdf">DeepWalk</a> and <a class="reference external" href="https://cs.stanford.edu/~jure/pubs/node2vec-kdd16.pdf">Node2vec</a>  aim to learn a low-dimensional feature representation for nodes through a stream of random walks. These random walks explore the nodes’ variant neighborhoods. Thus, random walk based methods are much more scalable for large graphs and they generate informative embeddings. Although very similar in nature, DeepWalk simulates uniform random walks and Node2vec employs search-biased random walks, which enables embedding to capture the community or structural equivalence via different bias settings. <a class="reference external" href="https://arxiv.org/pdf/1503.03578.pdf">LINE</a> combines two phases for embedding feature learning: one phase uses a breadth-first search (BFS) traversal across first-order neighbors, and the second phase focuses on sampling nodes from second-order neighbors. <a class="reference external" href="https://arxiv.org/pdf/1706.07845.pdf">HARP</a> improves DeepWalk and Node2vec by creating a hierarchy for nodes and using the embedding of the coarsened graph as a better initialization in the original graph. <a class="reference external" href="https://pdfs.semanticscholar.org/37cf/46e45777e67676f80c9110bed675a9840590.pdf">Walklets</a>  extended Deepwalk by using multiple skip lengths in random walking. Random walk based approaches tend to be more computationally expensive than factorization based approaches but can capture complex properties and longer dependencies between nodes.</p>
+</div>
+<div class="section" id="neural-network-approaches">
+<h2>Neural network approaches<a class="headerlink" href="#neural-network-approaches" title="Permalink to this headline">¶</a></h2>
+<p>The third category of graph embedding approaches is based on neural networks. Deep neural networks based approaches capture highly non-linear network structure in graphs, which is neglected by factorization based and random walk based methods. One type of deep learning based methods such as <a class="reference external" href="https://www.kdd.org/kdd2016/papers/files/rfp0191-wangAemb.pdf">SDNE</a> uses a deep autoencoder to provide non-linear functions to preserve the first and second order proximities jointly. Similarly, <a class="reference external" href="https://pdfs.semanticscholar.org/1a37/f07606d60df365d74752857e8ce909f700b3.pdf">DNGR</a>  applies random surfing on input graph before a stacked denoising autoencoder and makes the embedding robust to noise in graphs. Another genre of methods use Graph Neural Networks(<em>GNNs</em>) and  Graph Convolutional Networks (<em>GCNs</em>) (<a class="reference external" href="https://arxiv.org/pdf/1312.6203.pdf">bruna2013spectral</a>, <a class="reference external" href="https://arxiv.org/pdf/1506.05163.pdf">henaff2015deep</a>, <a class="reference external" href="https://arxiv.org/pdf/1511.05493.pdf">li2015gated</a>, <a class="reference external" href="https://papers.nips.cc/paper/6703-inductive-representation-learning-on-large-graphs.pdf">hamilton2017inductive</a>) to aggregate the neighbors embeddings and features via convolutional operators, including spatial or spectral filters. GCNs learn embeddings in a semi-supervised manner and have shown great improvement and scalability on large graphs compared to other methods. <a class="reference external" href="https://papers.nips.cc/paper/7763-link-prediction-based-on-graph-neural-networks.pdf">SEAL</a> learns a wide range of link prediction heuristics from extracted local enclosing subgraphs with GNN. <a class="reference external" href="https://arxiv.org/pdf/1811.01287v1.pdf">DIFFPOOL</a>  employs a differentiable graph pooling module on GNNs to learn hierarchical embeddings of graphs. Variational <a class="reference external" href="https://arxiv.org/pdf/1611.07308.pdf">Graph Auto Encoders</a> (<em>VGAE</em>) utilizes a GCN as encoder and inner product as decoder, which provides embedding with higher quality than autoencoders. Deep neural network based algorithms like <em>SDNE</em> and <em>DNGR</em> can be computational costly since they require the global information such as adjacency matrix for each node as input. GCNs based methods are more scalable and flexible to characterize global and local neighbours through variant convolutional and pooling layers.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gem_ben.html" class="btn btn-neutral float-right" title="GEM-Benchmark" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="organization.html" class="btn btn-neutral float-left" title="Organization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

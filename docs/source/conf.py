@@ -14,23 +14,22 @@
 
 import sys
 import os
+import pip
 
 import sphinx_rtd_theme
-
-
 # -- Project information -----------------------------------------------------
 
-project = 'GEM-Benchmark'
+project = 'gemben'
 copyright = '2019, Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara'
 author = 'Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.0'
-
+release = "0.0.3"
+version = "0.0.3"
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('../GEM-benchmark'))
+sys.path.insert(0, os.path.abspath('../gemben'))
 # -- General configuration ---------------------------------------------------
 
 # Try to override the matplotlib configuration as early as possible
@@ -69,7 +68,7 @@ else:
 
 sphinx_gallery_conf = {
     # path to your examples scripts
-    'examples_dirs' : '../../examples',
+    'examples_dirs' : '../../gemben/experiments',
     # path where to save gallery generated examples
     'gallery_dirs'  : 'auto_examples'}
 
@@ -199,7 +198,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'GEM-Benchmarkdoc'
+htmlhelp_basename = 'gembendoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -245,7 +244,7 @@ latex_elements = {
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'GEM-Benchmark', u'GEM-Benchmark Documentation',
+    ('index', 'gemben', u'gemben Documentation',
      [u'Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara'], 1)
 ]
 
@@ -259,8 +258,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'GEM-Benchmark', u'GEM-Benchmark Documentation',
-   u'Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara', 'GEM-Benchmark', 'GEM-Benchmark.',
+  ('index', 'gemben', u'gemben Documentation',
+   u'Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara', 'gemben', 'gemben.',
    'Miscellaneous'),
 ]
 
@@ -292,3 +291,10 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'http://docs.python.org/': None}
+
+
+
+
+
+
+

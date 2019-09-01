@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>gemben.utils.bayesian_opt &mdash; gemben 0.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> gemben
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dependency.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing.html">Testing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../challenge.html">Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contibution.html">Why this Benchmark Package?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../organization.html">Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gem_ben.html">GEM-Benchmark</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Dataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataset.html">Benchmark Dataset</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">Baseline Graph Embedding Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html#gemben-utility-function">gemben utility function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html#evaluation-module">Evaluation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html#experiment-module">Experiment Module</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial - Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">General examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Addtional Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citations.html">Citing gemben</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">gemben</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>gemben.utils.bayesian_opt</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for gemben.utils.bayesian_opt</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pdb</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">numbers</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log10</span>
+
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="c1"># sys.path.append(&#39;./&#39;)</span>
+<span class="c1"># sys.path.append(os.path.realpath(__file__))</span>
+
+<span class="kn">from</span> <span class="nn">bayes_opt</span> <span class="k">import</span> <span class="n">BayesianOptimization</span>
+<span class="kn">from</span> <span class="nn">bayes_opt.observer</span> <span class="k">import</span> <span class="n">JSONLogger</span>
+<span class="kn">from</span> <span class="nn">bayes_opt.event</span> <span class="k">import</span> <span class="n">Events</span>
+<span class="kn">from</span> <span class="nn">bayes_opt.util</span> <span class="k">import</span> <span class="n">load_logs</span>
+<span class="kn">from</span> <span class="nn">bayes_opt</span> <span class="k">import</span> <span class="n">UtilityFunction</span>
+<span class="kn">from</span> <span class="nn">gemben.experiments</span> <span class="k">import</span> <span class="n">exp</span>
+
+<span class="n">methClassMap</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;gf&quot;</span><span class="p">:</span> <span class="s2">&quot;GraphFactorization&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;hope&quot;</span><span class="p">:</span> <span class="s2">&quot;HOPE&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;lap&quot;</span><span class="p">:</span> <span class="s2">&quot;LaplacianEigenmaps&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;node2vec&quot;</span><span class="p">:</span> <span class="s2">&quot;node2vec&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;sdne&quot;</span><span class="p">:</span> <span class="s2">&quot;SDNE&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;pa&quot;</span><span class="p">:</span> <span class="s2">&quot;PreferentialAttachment&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;rand&quot;</span><span class="p">:</span> <span class="s2">&quot;RandomEmb&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;cn&quot;</span><span class="p">:</span> <span class="s2">&quot;CommonNeighbors&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;aa&quot;</span><span class="p">:</span> <span class="s2">&quot;AdamicAdar&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;jc&quot;</span><span class="p">:</span> <span class="s2">&quot;JaccardCoefficient&quot;</span><span class="p">}</span>
+<span class="n">expMap</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;gf&quot;</span><span class="p">:</span> <span class="s2">&quot;GF MAP&quot;</span><span class="p">,</span> <span class="s2">&quot;lp&quot;</span><span class="p">:</span> <span class="s2">&quot;LP MAP&quot;</span><span class="p">,</span>
+			<span class="s2">&quot;nc&quot;</span><span class="p">:</span> <span class="s2">&quot;NC MAP&quot;</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="BayesianOpt"><a class="viewcode-back" href="../../../api.html#gemben.utils.bayesian_opt.BayesianOpt">[docs]</a><span class="k">class</span> <span class="nc">BayesianOpt</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">	bayesian global optimization with Gaussian Process</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="s1">&#39;_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">key</span><span class="p">,</span><span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_params</span> <span class="o">=</span> <span class="n">kwargs</span>
+		<span class="c1">## when method is a list??</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_meth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_methods</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+		<span class="c1">## when dim is a list??</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_search_space</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_category_para</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_hyp_range</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_meth</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_hyp_d</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+	<span class="k">def</span> <span class="nf">search_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hyp_range</span><span class="p">):</span>
+		<span class="c1">### actual number</span>
+		<span class="c1">#space = {k: (min(v), max(v)) for k, v in hyp_range.items() if isinstance(v[0], numbers.Number)}</span>
+		<span class="c1">### power of 10</span>
+		<span class="n">space</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">v</span><span class="p">)),</span> <span class="n">log10</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hyp_range</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Number</span><span class="p">)}</span>
+		<span class="n">category_para</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hyp_range</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Number</span><span class="p">)}</span>
+		<span class="k">return</span> <span class="n">space</span><span class="p">,</span> <span class="n">category_para</span>
+
+
+	<span class="k">def</span> <span class="nf">optimization_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hyp_space</span><span class="p">):</span>
+		<span class="c1">## method class	</span>
+		<span class="n">MethClass</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
+			<span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;gem.embedding.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meth</span><span class="p">),</span>
+			<span class="n">methClassMap</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_meth</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_hyp_d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">})</span>
+
+		<span class="c1">## actual number</span>
+		<span class="c1">#self._hyp_d.update(hyp_space)</span>
+		<span class="c1">## turn power into actual number\</span>
+		<span class="n">hyp_space</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="mi">10</span><span class="o">**</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hyp_space</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;current hyp_space value is&quot;</span><span class="p">,</span> <span class="n">hyp_space</span><span class="p">)</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">_hyp_d</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">hyp_space</span><span class="p">)</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meth</span> <span class="o">==</span> <span class="s2">&quot;sdne&quot;</span><span class="p">:</span>
+			<span class="n">hyp_d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+				<span class="s2">&quot;modelfile&quot;</span><span class="p">:</span> <span class="p">[</span>
+					<span class="s2">&quot;gem/intermediate/enc_mdl_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.json&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_set</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">),</span>
+					<span class="s2">&quot;gem/intermediate/dec_mdl_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.json&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_set</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">)</span>
+				<span class="p">],</span>
+				<span class="s2">&quot;weightfile&quot;</span><span class="p">:</span> <span class="p">[</span>
+					<span class="s2">&quot;gem/intermediate/enc_wts_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.hdf5&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_set</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">),</span>
+					<span class="s2">&quot;gem/intermediate/dec_wts_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.hdf5&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_set</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">)</span>
+				<span class="p">]</span>
+			<span class="p">})</span>
+		<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meth</span> <span class="o">==</span> <span class="s2">&quot;gf&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meth</span> <span class="o">==</span> <span class="s2">&quot;node2vec&quot;</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_hyp_d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;data_set&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_set</span><span class="p">})</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hyp_d:&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_hyp_d</span><span class="p">)</span>
+		<span class="n">MethObj</span> <span class="o">=</span> <span class="n">MethClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hyp_d</span><span class="p">)</span>
+		<span class="n">gr</span><span class="p">,</span> <span class="n">lp</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">run_exps</span><span class="p">(</span><span class="n">MethObj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meth</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_di_graph</span><span class="p">,</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_data_set</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_node_labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">)</span>
+		<span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lp</span><span class="p">)</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;lp res&quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">res</span>
+
+
+
+	<span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">init_points</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">acq</span> <span class="o">=</span> <span class="s1">&#39;poi&#39;</span> <span class="p">):</span>
+        <span class="c1">## ei, poi, ucb</span>
+		<span class="c1">#utility = UtilityFunction(kind=&quot;ucb&quot;, kappa=2.5, xi=0.0)</span>
+
+		<span class="k">for</span> <span class="n">hyp</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_category_para</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_hyd_d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_category_para</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">hyp</span><span class="p">))</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;category_para: &quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_hyd_d</span> <span class="p">)</span>
+			<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BayesianOptimization</span><span class="p">(</span>
+			<span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimization_func</span><span class="p">,</span>
+			<span class="n">pbounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_space</span><span class="p">,</span>
+			<span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
+			<span class="p">)</span>
+
+
+			<span class="n">log_path</span> <span class="o">=</span> <span class="s2">&quot;gem/intermediate/bays_opt/&quot;</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">log_path</span><span class="p">)</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="k">pass</span>
+			<span class="n">logger</span> <span class="o">=</span> <span class="n">JSONLogger</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">log_path</span><span class="o">+</span><span class="s2">&quot;logs.json&quot;</span><span class="p">)</span>
+			<span class="n">optimizer</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">Events</span><span class="o">.</span><span class="n">OPTMIZATION_STEP</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+
+			<span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span>
+				<span class="n">init_points</span><span class="o">=</span><span class="n">init_points</span><span class="p">,</span> 
+				<span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span>
+				<span class="n">acq</span><span class="o">=</span> <span class="n">acq</span><span class="p">,</span>
+				<span class="n">kappa</span><span class="o">=</span><span class="mf">2.576</span><span class="p">,</span>
+				<span class="n">xi</span><span class="o">=</span><span class="mf">1.0</span>
+			<span class="p">)</span>
+
+
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;category_para: &quot;</span><span class="p">,</span> <span class="p">)</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final result:&quot;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+		<span class="k">return</span> <span class="mi">0</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GEM-Benchmark &mdash; gemben 0.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Benchmark Dataset" href="dataset.html" />
+    <link rel="prev" title="Background" href="background.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> gemben
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Start</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dependency.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="challenge.html">Challenges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contibution.html">Why this Benchmark Package?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GEM-Benchmark</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#real-graphs">Real Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluation-metrics">Evaluation Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gfs-score">GFS-score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#link-prediction-baselines">Link Prediction Baselines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#embedding-approaches">Embedding Approaches</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Dataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Benchmark Dataset</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Baseline Graph Embedding Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#gemben-utility-function">gemben utility function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#evaluation-module">Evaluation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#experiment-module">Experiment Module</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial - Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">General examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Addtional Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citations.html">Citing gemben</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gemben</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>GEM-Benchmark</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/gem_ben.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gem-benchmark">
+<h1>GEM-Benchmark<a class="headerlink" href="#gem-benchmark" title="Permalink to this headline">¶</a></h1>
+<p>Unlike other fields with well established benchmark datasets (e.g. <a class="reference external" href="http://homes.sice.indiana.edu/filiradi/Mypapers/pre78_046110_2008.pdf">community detection</a>), the graph embedding community has adopted an ad-hoc approach to evaluate new methods. Typically, graph embedding methods are evaluated on only a few real networks, and these are biased towards specific properties. This ad-hoc evaluation approach restricts us from understanding how the algorithm would behave if we vary a certain property of the graph, or how the algorithm performs on other types of graphs. In order to propose a more rigorous evaluation approach, we must first to understand the key attributes that govern the performance of graph embedding methods. First, the <em>size of the graph</em> (<strong>A1</strong>) is a challenge for any method. Real graphs vary in the number of nodes, from a few hundred to millions of nodes. Different methods make different assumptions on how to capture the higher order proximities and structural dependencies between nodes, and this greatly affects their scalability. Second, the <em>density of the graph</em> (<strong>A2</strong>) plays an important role in defining its structure. Lower density results in lesser information about the nodes which may hamper the performance of some methods. Third, the <em>dimension of the embedding</em> (<strong>A3</strong>) determines how concisely the method can store the information about a given graph. Higher dimension of the embedding may lead to overfitting of the graph whereas lower dimension of the embedding may not be enough to capture the information the graph provides resulting in underfitting. Fourth, the <em>evaluation metric</em> (<strong>A4</strong>) used to evaluate the method captures different aspects of the prediction. Global metrics are often biased towards high degree nodes whereas local metrics can be biased towards lower degree nodes.</p>
+<p>In this benchmark libary, we take the first step towards establishing a graph embedding benchmark. We propose a benchmark evaluation framework to answer the following questions:</p>
+<ul class="simple">
+<li><p><strong>Q1</strong>: How does the performance of embedding methods vary with the increasing size of the graph?</p></li>
+<li><p><strong>Q2</strong>: How does increasing the density of graph affect the model?</p></li>
+<li><p><strong>Q3</strong>: How does the optimal embedding dimension vary with an increasing number of nodes in the graph?</p></li>
+<li><p><strong>Q4</strong>: How does the performance vary with respect to the evaluation metric?</p></li>
+</ul>
+<p>To address the above questions, we introduce a suite of 100 real graphs and vary the above attributes (<strong>A1</strong>, …, <strong>A4</strong>) in the graphs and the embedding methods. Varying the <em>size of the graph</em> (<strong>A1</strong>) in terms of number of nodes answers the first question (<strong>Q1</strong>) and helps us understand which methods are best when used in small, medium, and large graphs. Similarly, varying the <em>density of the graph</em> (<strong>A2</strong>) in terms of the average degree of nodes helps us understand its effect in the embedding performance. This answers the second question (<strong>Q2</strong>). Furthermore, varying the <em>dimension of the embedding</em> (<strong>A3</strong>) helps us draw insights into the information compression power of the embedding approach. This answers the third question (<strong>Q3</strong>). Finally, by varying the <em>evaluation metrics</em> (<strong>A4</strong>) we can analyze the performance sensitivity of the method and can help us infer the bias of the embedding method towards specific nodes int he graph. This answers the fourth question (<strong>Q4</strong>).</p>
+<div class="section" id="real-graphs">
+<h2>Real Graphs<a class="headerlink" href="#real-graphs" title="Permalink to this headline">¶</a></h2>
+<p>We propose a novel data set containing 100 real world graphs from four domains: social, biology, economic, and technological. To demonstrate the usefulness of this benchmark, we evaluate eight graph embedding methods and measure their performance. This provides valuable insights about every method and their sensitivity to different graph properties. This paves the way towards a framework that can be used to recommend the best embedding approaches for a given graph with a unique set of properties.</p>
+<a class="reference internal image-reference" href="_images/realgraphProps.png"><img alt="Structure of the pykg2vec library." class="align-center" src="_images/realgraphProps.png" style="width: 800px;" /></a>
+<p>The above figure summarizes the main properties of the graphs from different domains in the data set. We observe that economic graphs have a lower average density varying between <strong>0.00160</strong> and <strong>0.00280</strong> with a higher number of nodes concentrated in lower density spectrum. Technological and social graphs are denser with an average density between <strong>0.0030</strong> to <strong>0.0160</strong>. It is interesting to note that despite the wide average density range densities are concentrated primarily in the lower and higher values with a gap in between. Biological graphs have an almost uniform distribution of densities ranging from <strong>0.005</strong> to <strong>0.0155</strong>.</p>
+<p>Next, we observe the domain-wise pattern of diameters. Economic graphs have the widest range(<strong>20 - 40</strong>) and the highest values of diameters which justifies the lowest average densities observed. Technological graphs with diameter ranges between <strong>11</strong> and <strong>17.5</strong> are less sparse when compared with economic graphs. Biological graphs have a good combination of both dense and sparse graphs with a majority of graphs lying in small diameter range. Biological graphs typically have short long diameter ranges as (<strong>8</strong> to <strong>12</strong>) and (<strong>16</strong> to <strong>18</strong>) respectively. Social graphs have in general a lower diameter around 10 although some of them have higher diameters.</p>
+<p>On further investigation, we observe that biological networks have the highest clustering tendencies with an average clustering coefficient as <strong>0.10</strong>. However, economic graphs stand in absolute contrast to them with very low clustering coefficient of <strong>0.00016</strong> as the highest recorded average clustering coefficient. Technological networks are somewhere in between the aforementioned extremes with <strong>0.03</strong> as the highest recorded average clustering coefficients. Clustering tendencies can be sought to have a high correlation with average density and diameter observations.</p>
+<blockquote>
+<div><p>Note that these 100 graphs include a very diverse set of graphs in terms of the <em>size of the graph</em> (<strong>A1</strong>) ranging from <strong>200</strong> to <strong>1500</strong> nodes, and in terms of the <em>density of the graph</em> (<strong>A2</strong>) ranging from an average density between <strong>0.0015</strong> to <strong>0.020</strong>. This graph diversity is helpful in characterizing the performance of different embedding methods.</p>
+</div></blockquote>
+</div>
+<div class="section" id="evaluation-metrics">
+<h2>Evaluation Metrics<a class="headerlink" href="#evaluation-metrics" title="Permalink to this headline">¶</a></h2>
+<p>In the graph embedding literature, there are two primary metrics that are used to evaluate the performance of the methods on link prediction:</p>
+<ol class="arabic simple">
+<li><p>Precision at <span class="math">k</span> (<span class="math">P&#64;k</span>) and</p></li>
+<li><p>Mean Average Precision (<span class="math">MAP</span>) These metrics are defined as follows:</p></li>
+</ol>
+<p><strong>P&#64;k</strong> is the fraction of correct predictions in the top <span class="math">k</span> predictions. It is defined as
+<span class="math">P&#64;k = \frac{|E_{pred}(1:k) \cap E_{obs}|}{k}</span>,</p>
+<p>where <span class="math">E_{pred}(1:k)</span> are the top <span class="math">k</span> predictions and <span class="math">E_{obs}</span> are the observed edges/hidden edges.</p>
+<p><span class="math">MAP</span> estimates the prediction precision for every node and computes the prediction average over all nodes, as follows:</p>
+<p><span class="math">MAP = \frac{\sum_i AP(i)}{|V|}</span></p>
+<p>where <span class="math">AP(i) = \frac{\sum_k P&#64;k(i) \cdot \mathbb{I}\{E_{pred_i}(k) \in E_{obs_i}\}}{|\{k: E_{pred_i}(k) \in E_{obs_i}\}|}</span>,</p>
+<p><span class="math">P&#64;k(i) = \frac{|E_{pred_i}(1:k) \cap E_{obs_i}|}{k}</span>,</p>
+<p>and <span class="math">E_{pred_i}</span> and <span class="math">E_{obs_i}</span> are the predicted and observed edges for node <span class="math">i</span> respectively.</p>
+<p>Intuitively, <span class="math">P&#64;k</span> is a global metric that measures the accuracy of the most likely links predicted. On the other hand, <em>MAP</em> measures the accuracy of prediction for each node and computes their average. These metrics are often uncorrelated and reflect the properties captured by the prediction method at different levels (<span class="math">MAP</span> on local level and <span class="math">P&#64;k</span> on global level). In this benchmark library, we present results using both these metrics to analyze each approach.</p>
+</div>
+<div class="section" id="gfs-score">
+<h2>GFS-score<a class="headerlink" href="#gfs-score" title="Permalink to this headline">¶</a></h2>
+<p>We now define a set of scores to evaluate a graph embedding model on our data set. The scores are divided into components to draw insights into a method’s approach across domains and metrics. We further plot the metrics varying various graph properties to understand the sensitivity of the models to these properties.</p>
+<p>Given a set of graph domains <span class="math">\mathcal{D}</span>, a set of evaluation metrics <span class="math">\mathcal{M}</span> and evaluation function <span class="math">e_m (graph, approach)</span> for <span class="math">m \in \mathcal{M}</span>, we define GFS-score for an approach <span class="math">a</span> as follows:</p>
+<p><span class="math">micro-GFS-m(a) = \frac{ \sum_{g \in \mathcal{G}} (e_m(g, a)/e_m(g, random)) }{|\mathcal{G}|}</span></p>
+<p><span class="math">macro-GFS-m(a) = \frac{\sum_{d \in \mathcal{D}} GFS-m(d, a)}{|\mathcal{D}|}</span></p>
+<p><span class="math">GFS-m(d, a) = \frac{ \sum_{g \in \mathcal{G}_d} (e_m(g, a)/e_m(g, random)) }{|\mathcal{G}_d|}</span></p>
+<p>where <span class="math">\mathcal{G}_d</span> is the set of graphs in domain <span class="math">d</span>.</p>
+<p>The GFS-score is a robust score which averages over a set of real graphs with varying properties. It is normalized in order to ascertain the gain in performance with respect to a random prediction. The domain scores provide insights into the applicability of each approach to the different graph categories.</p>
+</div>
+<div class="section" id="link-prediction-baselines">
+<h2>Link Prediction Baselines<a class="headerlink" href="#link-prediction-baselines" title="Permalink to this headline">¶</a></h2>
+<p>Our link prediction baselines were selected to showcase the utility of embedding approaches on real graphs and establish the ground truth for comparison between the state-of-the-art methods. The link prediction baselines are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://science.sciencemag.org/content/286/5439/509">Preferential Attachment</a> :is based on the assumption that the connection to a node is proportional to its degree. It defines the similarity between the nodes as the product of their degrees.</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/cond-mat/0104209.pdf">Common Neighbors</a>: defines the similarity between nodes as the number of common neighbors between them.</p></li>
+<li><p><a class="reference external" href="https://reader.elsevier.com/reader/sd/pii/S0378873303000091?token=6F43C18383A6F25A71900BE3D0FC6C10251CCB28A020DD02EB00C3758F0DBDB4E69D3C3A41DE87D28C79A03F0EED5157">Adamic Adar</a>: is based on the intuition that common neighbors with very large neighbourhoods are less significant than common neighbors with small neighborhoods when predicting a connection between two nodes. Formally, it is defined as the sum of the inverse logarithmic degree centrality of the neighbours shared by the two nodes.</p></li>
+<li><p><a class="reference external" href="https://dl.acm.org/citation.cfm?id=576628">Jaccards Coefficient</a>: measures the probability that two nodes <span class="math">i</span> and <span class="math">j</span> have a connection to node <span class="math">k</span>, for a randomly selected node <span class="math">k</span> from the neighbors of <span class="math">i</span> and <span class="math">j</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="embedding-approaches">
+<h2>Embedding Approaches<a class="headerlink" href="#embedding-approaches" title="Permalink to this headline">¶</a></h2>
+<p>We illustrate the benchmark data set on four popular graph embedding techniques to illustrate the utility of the benchmark and rank the state-of-the-art embedding approaches. The techniques preserve various properties including local neighborhood, higher order proximity and structure.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://web.cse.ohio-state.edu/~belkin.8/papers/LEM_NIPS_01.pdf">Laplacian Eigenmaps</a> : It penalizes the weighted square of distance between neighbors. This is equivalent to factorizing the normalized Laplacian matrix.</p></li>
+<li><p><a class="reference external" href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/40839.pdf">Graph Factorization</a> : It factorizes the adjacency matrix with regularization.</p></li>
+<li><p><a class="reference external" href="https://www.kdd.org/kdd2016/papers/files/rfp0191-wangAemb.pdf">Higher Order Proximity Preserving</a> (<strong>HOPE</strong>): It factorizes the higher order similarity matrix between nodes using generalized singular value decomposition.</p></li>
+<li><p><a class="reference external" href="https://www.kdd.org/kdd2016/papers/files/rfp0191-wangAemb.pdf">Structural Deep Network Embedding</a> (<strong>SDNE</strong>) : It uses deep autoencoder along with Laplacian Eigenmaps objective to preserve first and second order proximities.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dataset.html" class="btn btn-neutral float-right" title="Benchmark Dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="background.html" class="btn btn-neutral float-left" title="Background" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Palash Goyal, Di Huang, Ankita Goswami, Sujit Rokka Chhetri, Arquimedes Canedo and Emilio Ferrara
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
