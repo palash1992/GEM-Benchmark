@@ -3,6 +3,8 @@ Graph embedding, which refers to the task of representing nodes of a graph in a 
 
 ``GEM-benchmark`` is a Python package which offers a general framework to benchmark graph embedding methods. It has a suite of 100 real graphs and 12 synthetic graph generators and results of 9 link prediction methods on these 100 graphs. A paper showcasing the results using ``GEM-benchmark`` on various real world datasets can be accessed through [Benchmarks for Graph Embedding Evaluation](https://arxiv.org/abs/1908.06543).
 
+``GEM-benchmark`` readme can also be accessed as [https://palash1992.github.io/GEM-Benchmark/](https://palash1992.github.io/GEM-Benchmark/).
+
 The suite of 100 real graphs are primarily subsets of [CommunityFitNet](https://github.com/Aghasemian/CommunityFitNet) and [SNAP](http://snap.stanford.edu/). Please cite these references when using the real graphs.
 
 The module was developed and is maintained by Palash Goyal, Di Huang, Ankita Gowswami and Sujit Rokka Chhetri.
