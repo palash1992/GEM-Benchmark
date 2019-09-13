@@ -96,12 +96,21 @@ def expNC(X, Y, test_ratio_arr,
         micro[round_id] = micro_round
         macro[round_id] = macro_round
 
-    summ_file.write('Micro-F1 LR\t%s\n' % ('\t'.join(map(str, micro[0]))))
-    summ_file.write('Macro-F1 LR\t%s\n' % ('\t'.join(map(str, macro[0]))))
-    summ_file.close()
+        
     pickle.dump([test_ratio_arr, micro, macro],
                 open('%s_%s.nc' % (res_pre, m_summ), 'wb'))
-    m_avg = (np.array(micro) + np.array(macro)) / 2.0
+    m_avg = (np.array(micro) + np.array(macro)) / 2.0   
+        
+    if len(test_ratio) > 1:
+        summ_file.write('Micro-F1 LR\t%s\n' % ('\t'.join(map(str, micro[0]))))
+        summ_file.write('Macro-F1 LR\t%s\n' % ('\t'.join(map(str, macro[0]))))
+         # Return the average of micro and macro scores at middle value
+        res = list(m_avg[:, len(m_avg) // 2])
+    else:
+        summ_file.write('Micro-F1 LR\t%s\n' % ('\t'.join(map(str, [np.mean(np.array(micro).reshape(1,len(micro)))])))
+        summ_file.write('Macro-F1 LR\t%s\n' % ('\t'.join(map(str, [np.mean(np.array(macro).reshape(1,len(macro)))])))
+        res = list(m_avg.reshape((1,len(m_avg)))[0])
+    summ_file.close()
+                        
 
-    # Return the average of micro and macro scores at middle value
-    return list(m_avg[:, len(m_avg) // 2])
+    return res
